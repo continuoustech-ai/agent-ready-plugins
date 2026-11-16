@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "agent-ready-directory": {
+      "serverUrl": "https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/mcp",
+      "headers": {
+        "X-API-Key": "${ARD_API_KEY}"
+      },
+      "variables": [
+        {
+          "name": "ARD_API_KEY",
+          "title": "API key",
+          "description": "Your ard_... key for the Agent-Ready Directory"
+        }
+      ]
+    }
+  }
+}

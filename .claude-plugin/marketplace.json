@@ -1,0 +1,14 @@
+{
+  "name": "agent-ready",
+  "description": "Continuous Tech plugins for the Agent-Ready Directory",
+  "owner": {
+    "name": "Continuous Tech"
+  },
+  "plugins": [
+    {
+      "name": "agent-ready-directory",
+      "source": "./plugins/agent-ready-directory",
+      "description": "Find plumbers, HVAC companies and electricians near Austin, TX"
+    }
+  ]
+}
