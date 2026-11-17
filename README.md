@@ -3,6 +3,8 @@
 Plugins for the Agent-Ready Directory, for Claude Code (Claude) and Antigravity (Gemini). This repository holds only
 plugin files: no code, no secrets.
 
+**Website:** https://dev-api-agent-ready-directory-75822585439.us-west1.run.app (what it is, the docs at `/docs`, your API key at `/keys`).
+
 | Plugin | What it does |
 | --- | --- |
 | `agent-ready-directory` | Finds plumbers, HVAC companies and electricians near Austin, TX: the skill (how to handle a home-service request) and the connection to the directory's MCP server (`/mcp` on the API service, five tools) |
@@ -19,12 +21,13 @@ plugins/agent-ready-directory/
 
 Both apps use the same skill and the same server; only the manifest and the way the key is set up differ.
 
-## Install in Claude Code (testers)
+## Install in Claude Code
 
-You need: Claude Code, read access to this repository, and an API key (`ard_...`) from the lead.
+You need: Claude Code and an API key (`ard_...`).
 
-1. Let git reach this private repository without a prompt: `gh auth login`, then `gh auth setup-git`. Or use an
-   SSH key that works without a passphrase prompt. Without a GitHub SSH key, set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1`.
+1. **Get a key (free):** open https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/keys, sign in with your email (we send a link), accept the terms and create a
+   key. It is shown **once**: copy it. Up to 3 keys per account; 30 calls a minute and 1,000 a day for the account.
+   Lost it? Create a new one there and revoke the old one.
 2. If you added the server by hand before (`claude mcp add agent-ready-directory ...`), remove it:
    `claude mcp remove agent-ready-directory`.
 3. In a Claude Code session (not in the shell, which does not ask for the key):
@@ -40,9 +43,9 @@ You need: Claude Code, read access to this repository, and an API key (`ard_...`
 6. Check: `/mcp` lists `plugin:agent-ready-directory:agent-ready-directory` as connected. Then ask, for example:
    "My water heater is leaking, I'm in 78704".
 
-## Install in Antigravity (testers, Gemini)
+## Install in Antigravity (Gemini)
 
-You need: the Antigravity CLI (`agy`), read access to this repository, and an API key (`ard_...`) from the lead.
+You need: the Antigravity CLI (`agy`) and an API key (`ard_...`) from https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/keys.
 
 1. Install the CLI if you do not have it (Windows PowerShell: `irm https://antigravity.google/cli/install.ps1 | iex`;
    other systems: Antigravity's Getting Started page). Open a new terminal and check: `agy --version`.
