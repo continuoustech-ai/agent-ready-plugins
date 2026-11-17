@@ -139,7 +139,7 @@ Errors read `code: message`.
 - `rate_limited`: wait the seconds it says, then try once more; tell the person if it fails again.
 - `daily_limit`: the key's account used its calls for today (resets 00:00 UTC); say so and stop.
 - `blocked`, `no_key`, `bad_key`, or the directory's tools are missing or will not connect: the API key is missing,
-  wrong or turned off. Tell the person to get or check a key at https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/keys, then set it with
+  wrong or turned off. Tell the person to get or check a key at https://mcp.myownline.com/keys, then set it with
   `/plugin configure agent-ready-directory@agent-ready` in Claude Code.
 - Anything else: say the directory is not answering right now. Never make up results to fill the gap.
 

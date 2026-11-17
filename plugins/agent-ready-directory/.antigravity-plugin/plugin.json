@@ -1,7 +1,7 @@
 {
   "name": "agent-ready-directory",
   "displayName": "Agent-Ready Directory",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Find plumbers, HVAC companies and electricians near Austin, TX",
   "author": { "name": "Continuous Tech" },
   "suggestedPrompts": [
