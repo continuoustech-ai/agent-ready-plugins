@@ -140,7 +140,9 @@ Errors read `code: message`.
 - `daily_limit`: the key's account used its calls for today (resets 00:00 UTC); say so and stop.
 - `blocked`, `no_key`, `bad_key`, or the directory's tools are missing or will not connect: the API key is missing,
   wrong or turned off. Tell the person to get or check a key at https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/keys, then set it with
-  `/plugin configure agent-ready-directory@agent-ready` in Claude Code.
+  `/plugin configure agent-ready-directory@agent-ready` in Claude Code, in the plugin settings in Antigravity, or in
+  the `ARD_API_KEY` environment variable in Codex (then restart it). Do not search the web or use other sources
+  instead: say the directory is not connected and stop.
 - Anything else: say the directory is not answering right now. Never make up results to fill the gap.
 
 ## 11. Examples (made-up businesses)
