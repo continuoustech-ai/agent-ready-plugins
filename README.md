@@ -43,6 +43,16 @@ You need: Claude Code and an API key (`ard_...`).
 6. Check: `/mcp` lists `plugin:agent-ready-directory:agent-ready-directory` as connected. Then ask, for example:
    "My water heater is leaking, I'm in 78704".
 
+### Troubleshooting (Claude Code)
+
+- **"Dynamic Client Registration rejected (HTTP 404)"** after Authenticate or Reconnect: the server got no key or a
+  wrong one. It uses API keys, not sign-in: do not use Authenticate. Set the key with
+  `/plugin configure agent-ready-directory@agent-ready`, then restart Claude Code.
+- **Reconnect does not ask for the key.** It uses the saved one; only install and `/plugin configure` ask.
+- **The tools show twice:** you also have a hand-made server; `claude mcp remove agent-ready-directory`.
+- **Lost the key:** it cannot be shown again. Make a new one at https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/keys, revoke the old one, set the new one.
+- **`daily_limit`:** the account used today's calls (30 a minute, 1,000 a day); they reset at 00:00 UTC.
+
 ## Install in Antigravity (Gemini)
 
 You need: the Antigravity CLI (`agy`) and an API key (`ard_...`) from https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/keys.
