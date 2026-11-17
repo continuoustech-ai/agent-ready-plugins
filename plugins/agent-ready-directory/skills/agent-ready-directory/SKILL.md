@@ -68,7 +68,8 @@ someone vulnerable, sparks, smoke, a burning smell from wiring, a gas smell.
 - **`caveats`.** Weak spots ("license not verified", "phone not confirmed", "may be closed", "license expired
   <date>", "listed by one source only"). Always pass them on.
 - **`zip_match`** on a card: `job` = it has done permitted work in that ZIP; `served` = its own website lists the
-  area; `likely` = its address is nearby. Say which, in plain words.
+  area; `likely` = its own address is in that ZIP. Say which, in plain words. A ZIP search matches that ZIP only;
+  businesses next door in another ZIP are not included, so for few results offer a nearby city (`city`).
 - **Certainty** on each fact: `confirmed` = say it plainly; `likely` = say "likely" or "probably"; `may` = say
   "may" and suggest checking when they call.
 - **Licenses.** `license_verified` (card) and each license's `verified` (profile) are the only basis for saying
@@ -129,7 +130,11 @@ it; the listing won't change right away."
 
 Errors read `code: message`.
 - `no_filter`, `bad_zip`: you sent nothing usable or a malformed ZIP; ask for a five-digit ZIP.
-- `unknown_city`, `ambiguous_city`: ask for the ZIP.
+- `unknown_city`, `ambiguous_city`, `bad_city`: ask for the ZIP.
+- `zip_or_city`: you sent both; send only the ZIP.
+- `bad_service`: the code is not one from `list_services`; search again with `trade` and `zip` only.
+- `bad_trade`: the trade is not plumbing, hvac or electrical; the directory does not cover it (section 7).
+- `no_profile`: the business has no profile yet; give what the search card had (name, phone) and say so.
 - `not_found`: the business is not in the directory (or the id is wrong); search by name.
 - `rate_limited`: wait the seconds it says, then try once more; tell the person if it fails again.
 - `daily_limit`: the key's account used its calls for today (resets 00:00 UTC); say so and stop.
