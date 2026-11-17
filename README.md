@@ -3,7 +3,7 @@
 Plugins for the Agent-Ready Directory, for Claude Code (Claude), Antigravity (Gemini) and Codex (GPT). This repository
 holds only plugin files: no code, no secrets.
 
-**Website:** https://dev-api-agent-ready-directory-75822585439.us-west1.run.app (what it is, the docs at `/docs`, your API key at `/keys`).
+**Website:** https://mcp.myownline.com (what it is, the docs at `/docs`, your API key at `/keys`).
 
 | Plugin | What it does |
 | --- | --- |
@@ -29,7 +29,7 @@ Claude's `.mcp.json`.
 
 You need: Claude Code and an API key (`ard_...`).
 
-1. **Get a key (free):** open https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/keys, sign in with your email (we send a link), accept the terms and create a
+1. **Get a key (free):** open https://mcp.myownline.com/keys, sign in with your email (we send a link), accept the terms and create a
    key. It is shown **once**: copy it. Up to 3 keys per account; 30 calls a minute and 1,000 a day for the account.
    Lost it? Create a new one there and revoke the old one.
 2. If you added the server by hand before (`claude mcp add agent-ready-directory ...`), remove it:
@@ -49,17 +49,20 @@ You need: Claude Code and an API key (`ard_...`).
 
 ### Troubleshooting (Claude Code)
 
+- **Moved to https://mcp.myownline.com (1.3.0):** the old run.app address still works, but update the plugin:
+  `/plugin marketplace update agent-ready`, then update `agent-ready-directory` in `/plugin` and restart. Your key
+  stays the same. A server you added by hand (`claude mcp add ...`): remove it and use the plugin.
 - **"Dynamic Client Registration rejected (HTTP 404)"** after Authenticate or Reconnect: the server got no key or a
   wrong one. It uses API keys, not sign-in: do not use Authenticate. Set the key with
   `/plugin configure agent-ready-directory@agent-ready`, then restart Claude Code.
 - **Reconnect does not ask for the key.** It uses the saved one; only install and `/plugin configure` ask.
 - **The tools show twice:** you also have a hand-made server; `claude mcp remove agent-ready-directory`.
-- **Lost the key:** it cannot be shown again. Make a new one at https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/keys, revoke the old one, set the new one.
+- **Lost the key:** it cannot be shown again. Make a new one at https://mcp.myownline.com/keys, revoke the old one, set the new one.
 - **`daily_limit`:** the account used today's calls (30 a minute, 1,000 a day); they reset at 00:00 UTC.
 
 ## Install in Antigravity (Gemini)
 
-You need: the Antigravity CLI (`agy`) and an API key (`ard_...`) from https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/keys.
+You need: the Antigravity CLI (`agy`) and an API key (`ard_...`) from https://mcp.myownline.com/keys.
 
 1. Install the CLI if you do not have it (Windows PowerShell: `irm https://antigravity.google/cli/install.ps1 | iex`;
    other systems: Antigravity's Getting Started page). Open a new terminal and check: `agy --version`.
@@ -82,7 +85,7 @@ agy plugin install agent-ready-plugins/plugins/agent-ready-directory
 ## Install in Codex (GPT)
 
 You need: Node.js 18 or later, a ChatGPT account (or an OpenAI API key), and an API key (`ard_...`) from
-https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/keys.
+https://mcp.myownline.com/keys.
 
 In the Codex CLI the plugin gives the skill, but it cannot ask for the API key, so you add the server once yourself
 (step 4). The plugin's own server entry stays unused, so the tools do not show twice.
@@ -103,7 +106,7 @@ codex plugin add agent-ready-directory@agent-ready
 4. Add the server (once), in a terminal that has the key:
 
 ```
-codex mcp add agent-ready-directory --url https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/mcp --bearer-token-env-var ARD_API_KEY
+codex mcp add agent-ready-directory --url https://mcp.myownline.com/mcp --bearer-token-env-var ARD_API_KEY
 ```
 
 5. Check: start `codex`, type `/mcp`: `agent-ready-directory` shows as connected (5 tools). Then ask, for example:
@@ -120,7 +123,7 @@ codex mcp add agent-ready-directory --url https://dev-api-agent-ready-directory-
   with. Close every VS Code window and open it again, or load it into this terminal (PowerShell):
   `$env:ARD_API_KEY = [Environment]::GetEnvironmentVariable("ARD_API_KEY", "User")`.
 - **`bad_key`:** the key is mistyped or revoked; make a new one at
-  https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/keys and set it again (step 3).
+  https://mcp.myownline.com/keys and set it again (step 3).
 - **Uninstall:** `codex plugin remove agent-ready-directory@agent-ready`, `codex plugin marketplace remove agent-ready`,
   `codex mcp remove agent-ready-directory`.
 
@@ -133,7 +136,7 @@ Same flow as our other repositories: a branch, a pull request to `main`, the lea
 
 1. Edit the files (for the skill: `plugins/agent-ready-directory/skills/agent-ready-directory/SKILL.md`).
 2. **Raise `version`** in all three manifests, `.claude-plugin/plugin.json`, `.antigravity-plugin/plugin.json` and
-   `plugin.json` (1.2.0 -> 1.3.0). Without a new version, Claude Code and Codex users keep their old copy.
+   `plugin.json` (1.3.0 -> 1.4.0). Without a new version, Claude Code and Codex users keep their old copy.
 3. Check from the repository root:
    - `claude plugin validate .` (the last line reads `Validation passed`)
    - `agy plugin validate plugins/agent-ready-directory` (passes with three expected warnings: Antigravity ignores

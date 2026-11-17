@@ -2,7 +2,7 @@
   "mcpServers": {
     "agent-ready-directory": {
       "type": "http",
-      "url": "https://dev-api-agent-ready-directory-75822585439.us-west1.run.app/mcp",
+      "url": "https://mcp.myownline.com/mcp",
       "headers": {
         "Authorization": "Bearer ${user_config.api_key}"
       }
