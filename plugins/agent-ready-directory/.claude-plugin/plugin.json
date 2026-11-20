@@ -1,7 +1,7 @@
 {
   "name": "agent-ready-directory",
-  "version": "1.3.0",
-  "description": "Find plumbers, HVAC companies and electricians near Austin, TX",
+  "version": "1.4.0",
+  "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers near Austin, TX",
   "author": {
     "name": "Continuous Tech"
   },
@@ -14,5 +14,8 @@
       "required": true
     }
   },
-  "homepage": "https://mcp.myownline.com/"
+  "homepage": "https://mcp.myownline.com/",
+  "repository": "https://github.com/continuoustech-ai/agent-ready-plugins",
+  "license": "MIT",
+  "privacyPolicyUrl": "https://mcp.myownline.com/privacy"
 }

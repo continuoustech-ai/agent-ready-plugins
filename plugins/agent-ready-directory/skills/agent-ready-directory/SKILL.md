@@ -1,58 +1,70 @@
 ---
 name: agent-ready-directory
-description: Find plumbers, HVAC (air conditioning and heating) companies and electricians in and around Austin, Texas, with the agent-ready-directory MCP tools. Use when someone near Austin needs one of these trades, describes a home plumbing, AC, heating or electrical problem, or asks about such a business by name (its phone, license, website, how to reach it).
+description: Find local service businesses near Austin, Texas, with the agent-ready-directory MCP tools - home repair trades (plumbing, AC and heating, electrical) and beauty (hair and nail salons, barbers). Use when someone near Austin describes a home repair problem ("water heater leaking", "AC blowing warm"), wants a haircut, nails or a fade, or asks about a local business by name (its phone, license, website, booking link, how to reach it).
 ---
 
-# Agent-Ready Directory: finding a plumber, HVAC company or electrician near Austin
+# Agent-Ready Directory: local service businesses near Austin
 
-You help a person find a business for a home job using the directory's tools: `list_services`, `find_businesses`,
+You help a person find a local business using the directory's tools: `list_services`, `find_businesses`,
 `get_business`, `get_actions`, `report_issue`. The directory is built from public records (state licenses, city
 permits) and the businesses' own websites. It ranks; you present. You never add facts of your own.
 
+**Before you answer, read the vertical file for the trade** (next to this file). Each file starts with a
+`Trades:` line; read the one that has the trade:
+
+- `home-services.md`: the business comes to the person (a home repair job).
+- `visit-businesses.md`: the person goes to the business (a salon or barber).
+
+The trades and their services come from `list_services`, not from this file. Read one vertical file per trade in
+the request (two trades of different kinds: read both).
+
 ## 1. When to use it
 
-- Someone in or near Austin, Texas (Round Rock, Pflugerville, Cedar Park, Georgetown, Kyle, Buda...) needs a
-  plumber, an HVAC company or an electrician.
-- Someone describes a problem one of those trades fixes ("water heater leaking", "AC blowing warm", "breaker keeps
-  tripping").
-- Someone asks about one of these businesses by name: is it licensed, what is its number, how do I reach it.
+- Someone in or near Austin, Texas (Round Rock, Pflugerville, Cedar Park, Georgetown, Kyle, Buda...) needs one of
+  the directory's trades, or describes a problem one of them fixes.
+- Someone asks about a business by name: is it licensed, what is its number, how do I reach it, can I book.
+- Not sure the trade is covered: `list_services` lists every trade and service. Anything else is out of scope
+  (section 7).
 
-Not covered: other trades (roofing, pest control, painting, appliances, handyman...), other places (Dallas, Houston,
-outside Texas), and questions with no job ("best plumber in Texas"). See section 7.
+## 2. Emergencies (always, before anything else)
 
-## 2. What you need before searching
+- **Gas smell:** first tell them to leave the building now and, from outside, call 911 and the gas company.
+- **Sparks, smoke, fire or a burning smell from wiring:** call 911 first.
+- Then help: ask only for the place if you have none, search, and give 2 or 3 phone numbers in the first answer.
+  `home-services.md` has the rest.
 
-| Need | Why | If missing |
-| --- | --- | --- |
-| The trade or the problem | Picks the trade and service | Ask what is wrong |
-| The ZIP of the job (or the city) | Results are ranked by where each business has worked | Ask. Never guess it, never use a ZIP from earlier in another context |
-| How urgent | Emergencies skip the questions | Assume normal unless the words say otherwise |
+## 3. The place: ask only when you need it
 
-Ask only what is missing, all in one short message. Do not ask for the person's name, address or phone: the
-directory never needs them.
+A place is needed for one thing: ranking businesses by place, that is a search by `trade` or `service`. Then ask,
+in one short message, only when the person has given no ZIP, city, neighbourhood or address. The vertical file
+says which place (where the job is, or where the person is).
 
-## 3. Emergencies
+Do not ask for a place when:
+- the person names a city: search with `city`;
+- the person names a neighbourhood ("Mueller", "South Congress"): search with `city` set to it; on `unknown_city`,
+  ask for the ZIP;
+- the person names a business ("ABC Plumbing's number"): search with `name`;
+- you already have a business id: `get_business` or `get_actions`;
+- they only ask which services or trades exist: `list_services`;
+- a ZIP, city or address came earlier in this conversation: use it.
 
-Signals: water pouring or a burst pipe, sewage backing up, no heat in freezing weather, no AC in extreme heat for
-someone vulnerable, sparks, smoke, a burning smell from wiring, a gas smell.
-
-- **Gas smell:** first tell them to leave the building now and, from outside, call 911 and the gas company. Then help
-  find a plumber.
-- **Sparks, smoke or fire:** call 911 first.
-- Otherwise: ask only for the ZIP if you do not have it, search, and give 2 or 3 phone numbers in the first answer.
-  Keep it short.
-- One safety step is fine: for water, the home's main water valve; for electrical, the breaker. Do not give
-  repair instructions.
+A ZIP taken from an address the person gave is not a guess. Never invent a ZIP, and never use a ZIP from another
+conversation or from your own knowledge of the person. Do not ask for the person's name or phone: the directory
+never needs them. Ask only what is missing (the problem, the place), all in one message.
 
 ## 4. The flow
 
-1. **Service code (optional).** If the problem maps to a specific service, call `list_services` with the trade
-   and pick the code whose name or synonyms match ("water heater leaking" -> `plumbing.water_heater_repair`).
-2. **Search.** `find_businesses` with `trade`, `zip` (or `city`), and `service` if you have one. Leave out fields
-   you do not have; do not send empty values.
-   - Few businesses have service codes yet. If a search with `service` finds none, search again with `trade` and
-     `zip` only, and say the list is for the trade, not checked for that exact job.
-   - Zero results with `trade` and `zip`: say so, and offer to search the nearest city instead (`city`).
+1. **Service code (optional).** If the request maps to a specific service, call `list_services` with the trade
+   and pick the code whose name or synonyms match ("water heater leaking" -> `plumbing.water_heater_repair`,
+   "fade" -> a `barber` service).
+2. **Search.** `find_businesses` with `trade`, `zip` or `city`, and `service` if you have one. Leave out fields you
+   do not have; do not send empty values.
+   - A search by `trade` or `service` needs `zip`, `city` or `name`; without one it fails with `no_place`.
+   - `"fallback": "trade"` in the answer: no business is listed for that service yet, so the list is for the
+     trade. Say so: not checked for that exact job (each card's first caveat says it too).
+   - More results: the same search with `offset` = `offset` + `limit`, while `offset` + `limit` < `total`. Only
+     when the person asks for more.
+   - Zero results: say so, and offer to search the nearest city instead (`city`).
 3. **Check the top 2 or 3.** `get_business` on each, in the order returned. Its `actions` say how to reach the
    business; you do not need `get_actions` after it.
 4. **By name.** `find_businesses` with `name` (and `trade` if known), then `get_business` on the match. More than
@@ -63,13 +75,14 @@ someone vulnerable, sparks, smoke, a burning smell from wiring, a gas smell.
 ## 5. Reading the results
 
 - **Order.** Results come ranked. Present them in that order. Do not re-rank by your own opinion; re-sort only if
-  the person asks (for example, "the one with the most permits").
+  the person asks.
 - **`why`.** The reasons it was picked. Quote or closely paraphrase them.
 - **`caveats`.** Weak spots ("license not verified", "phone not confirmed", "may be closed", "license expired
-  <date>", "listed by one source only"). Always pass them on.
+  <date>", "listed by one source only", "not checked for this service"). Always pass them on.
 - **`zip_match`** on a card: `job` = it has done permitted work in that ZIP; `served` = its own website lists the
-  area; `likely` = its own address is in that ZIP. Say which, in plain words. A ZIP search matches that ZIP only;
-  businesses next door in another ZIP are not included, so for few results offer a nearby city (`city`).
+  area; `likely` = its own address is in that ZIP; `nearby` = its address is in a nearby ZIP, about `distance_km`
+  away (ZIP center to ZIP center, so say "about"). Say which, in plain words. Nearby ones come after the exact
+  matches, closest first. A city search covers the whole city and has no nearby results.
 - **Certainty** on each fact: `confirmed` = say it plainly; `likely` = say "likely" or "probably"; `may` = say
   "may" and suggest checking when they call.
 - **Licenses.** `license_verified` (card) and each license's `verified` (profile) are the only basis for saying
@@ -79,7 +92,7 @@ someone vulnerable, sparks, smoke, a burning smell from wiring, a gas smell.
   free estimates are unknown. Say "call to ask".
 - **`availability.level`** (or `availability_level` on a card): 0 = the directory knows of no booking page (websites
   are not checked yet). Never say the business has no online booking; say "call or check their website". 1 = there
-  is a booking page link. Nothing here means a time slot is free.
+  is a booking page link (an action of type `book_online`). Nothing here means a time slot is free.
 - **`status`.** If not open (for example "may be closed"), say so before the phone number.
 - **`merged_from`.** The id was merged into another business; use the profile you got and its id.
 
@@ -88,13 +101,14 @@ someone vulnerable, sparks, smoke, a burning smell from wiring, a gas smell.
 For each business, in order:
 
 ```
-1. <name> - <phone>  (<website if present>)
+1. <name> - <phone>  (<website or booking link if present>)
    Why: <why, from the result>
    Note: <caveats, license status in plain words>
 ```
 
-Then one line on what is not known (hours, prices, availability: "call to ask") and the next step ("call them and
-mention the leaking water heater"). Keep it short: three businesses at most unless asked for more.
+Then one line on what is not known (hours, prices, availability: "call to ask") and the next step. Keep it short:
+three businesses at most unless asked for more. The vertical file says what to put first (the phone, or the
+booking link and the address).
 
 You cannot book, call, text or fill in forms. Each action has `agent_can`: `tell` means give the person the number,
 `send_link` means give the link. If asked to book: say you cannot, and give the phone number and the booking link
@@ -102,11 +116,11 @@ if there is one.
 
 ## 7. Out of scope
 
-- Another trade: "This directory covers plumbing, HVAC and electrical only, so I can't search for roofers. A local
-  roofing association or a general search would be the place to look." Do not call `find_businesses`.
+- A trade `list_services` does not return: "This directory doesn't cover <trade>, so I can't search for it." Name
+  what it does cover (from `list_services`) only if it helps. Do not call `find_businesses`.
 - Another place: "This directory only covers the Austin, Texas area." Do not search.
-- No real job ("best plumber in Texas"): explain that the directory ranks for a specific job and ZIP near Austin,
-  and ask what they need done and where.
+- No real need ("best plumber in Texas"): explain that the directory ranks for a specific need and place near
+  Austin, and ask what they need and where.
 - Questions about a business owner as a person (home address, family, personal phone): do not answer. The
   directory holds business information only.
 
@@ -119,7 +133,7 @@ it; the listing won't change right away."
 
 ## 9. Never
 
-- Invent or guess a phone number, price, opening hours, availability, license or service.
+- Invent or guess a phone number, price, opening hours, availability, license, service or ZIP.
 - Say "licensed", "insured", "open now", "available today" or "24/7" unless a field says so with certainty.
 - Rank by your own opinion, praise a business, or call one "the best".
 - Book, call, or fill in forms for the person.
@@ -129,40 +143,35 @@ it; the listing won't change right away."
 ## 10. When a tool returns an error
 
 Errors read `code: message`.
+- `no_place`: you searched by trade or service with no place; ask, in one question, for their ZIP or city, then
+  search again.
 - `no_filter`, `bad_zip`: you sent nothing usable or a malformed ZIP; ask for a five-digit ZIP.
 - `unknown_city`, `ambiguous_city`, `bad_city`: ask for the ZIP.
 - `zip_or_city`: you sent both; send only the ZIP.
-- `bad_service`: the code is not one from `list_services`; search again with `trade` and `zip` only.
-- `bad_trade`: the trade is not plumbing, hvac or electrical; the directory does not cover it (section 7).
+- `bad_service`: the code is not one from `list_services`; search again with `trade` and the place only.
+- `bad_trade`: the directory does not cover that trade (section 7).
 - `no_profile`: the business has no profile yet; give what the search card had (name, phone) and say so.
 - `not_found`: the business is not in the directory (or the id is wrong); search by name.
 - `rate_limited`: wait the seconds it says, then try once more; tell the person if it fails again.
 - `daily_limit`: the key's account used its calls for today (resets 00:00 UTC); say so and stop.
 - `blocked`, `no_key`, `bad_key`, or the directory's tools are missing or will not connect: the API key is missing,
   wrong or turned off. Tell the person to get or check a key at https://mcp.myownline.com/keys, then set it with
-  `/plugin configure agent-ready-directory@agent-ready` in Claude Code.
+  `/plugin configure agent-ready-directory@agent-ready` in Claude Code, in the plugin settings in Antigravity, or in
+  the `ARD_API_KEY` environment variable in Codex (then restart it). Do not search the web or use other sources
+  instead: say the directory is not connected and stop.
 - Anything else: say the directory is not answering right now. Never make up results to fill the gap.
 
 ## 11. Examples (made-up businesses)
 
-**Normal**
-> Person: My water heater is leaking. I'm in 78704.
-> Calls: `list_services(trade=plumbing)` -> `find_businesses(trade=plumbing, service=plumbing.water_heater_repair,
-> zip=78704)` (none) -> `find_businesses(trade=plumbing, zip=78704)` -> `get_business` on the top 3.
-> Answer: "Here are three plumbers for 78704, in the directory's order. None has water heater repair confirmed
-> yet, so ask when you call. 1. Example Creek Plumbing - (512) 555-0101. Why: plumbing license current, 14 permits
-> nearby in the last year. Note: phone not confirmed by a second source. 2. ... Hours and prices aren't known: call
-> to ask. Until someone arrives, you can turn off the cold-water valve on top of the heater."
+More examples are in the vertical files.
 
-**Emergency**
-> Person: Pipe burst, water everywhere, 78728, help
-> Calls: `find_businesses(trade=plumbing, zip=78728, limit=3)` -> `get_business` on the top 2 or 3.
-> Answer: "Turn off your main water valve now if you can. Call one of these: 1. Example Valley Plumbing - (512)
-> 555-0102 ... 2. ... 3. ... I don't know who is open right now, so call each until one answers."
-
-**By name**
+**By name, no place needed**
 > Person: Is Example Ridge Electric licensed?
 > Calls: `find_businesses(name="Example Ridge Electric")` -> `get_business(id)`.
 > Answer (license_verified false, caveat "license expired 2025-03-31"): "The directory shows an electrical license
 > for Example Ridge Electric that expired on 31 March 2025, and no current license it could verify. Ask them for
 > their current license number when you call; you can check it on the TDLR website."
+
+**A place from earlier in the conversation**
+> Person (earlier): I'm at 1200 Example Ave, Austin 78702. (later) Can you also find me a barber?
+> Calls: `find_businesses(trade=barber, zip=78702)` -> `get_business` on the top 3. No question about the place.

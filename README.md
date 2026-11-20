@@ -1,25 +1,31 @@
 # agent-ready-plugins
 
-Plugins for the Agent-Ready Directory, for Claude Code (Claude) and Antigravity (Gemini). This repository holds only
-plugin files: no code, no secrets.
+Plugins for the Agent-Ready Directory, for Claude Code (Claude), Antigravity (Gemini) and Codex (GPT). This repository
+holds only plugin files: no code, no secrets.
 
 **Website:** https://mcp.myownline.com (what it is, the docs at `/docs`, your API key at `/keys`).
 
 | Plugin | What it does |
 | --- | --- |
-| `agent-ready-directory` | Finds plumbers, HVAC companies and electricians near Austin, TX: the skill (how to handle a home-service request) and the connection to the directory's MCP server (`/mcp` on the API service, five tools) |
+| `agent-ready-directory` | Finds plumbers, HVAC companies, electricians, salons and barbers near Austin, TX: the skill (how to handle a request) and the connection to the directory's MCP server (`/mcp` on the API service, five tools) |
 
 ```
-.claude-plugin/marketplace.json                       the catalogue: lists the plugins in this repository (Claude Code)
+.claude-plugin/marketplace.json                       the catalogue: lists the plugins in this repository (Claude Code, Codex)
 plugins/agent-ready-directory/
   .claude-plugin/plugin.json                          Claude Code: name, version, the API key setting
   .mcp.json                                           Claude Code: the MCP server URL; the key is sent as a Bearer token
   .antigravity-plugin/plugin.json                     Antigravity: name, version, suggested prompts
   mcp_config.json                                     Antigravity: the MCP server URL; the key (ARD_API_KEY) is sent as X-API-Key
-  skills/agent-ready-directory/SKILL.md               the skill (both)
+  plugin.json                                         Codex: name, version, listing details (Agent Plugins format)
+  mcp.json                                            Codex: the MCP server URL; declares an API key sent as a Bearer token
+  skills/agent-ready-directory/SKILL.md               the skill (all three apps): the rules for every trade
+  skills/agent-ready-directory/home-services.md       the skill: plumbing, HVAC, electrical (read when needed)
+  skills/agent-ready-directory/visit-businesses.md    the skill: salons and barbers (read when needed)
 ```
 
-Both apps use the same skill and the same server; only the manifest and the way the key is set up differ.
+All three apps use the same skill and the same server; only the manifest and the way the key is set up differ. Each
+app reads only its own files: Antigravity ignores `plugin.json` and `mcp.json`, and Codex uses them instead of
+Claude's `.mcp.json`.
 
 ## Install in Claude Code
 
@@ -78,26 +84,75 @@ agy plugin install agent-ready-plugins/plugins/agent-ready-directory
 5. Updates: there is no auto-update from this repository. `git pull` in your copy, then
    `agy plugin uninstall agent-ready-directory` and install again (step 2); you may be asked for the key again.
 
-Note (both apps): the `report_issue` tool writes a real report to the directory's database. When testing it, say it is
+## Install in Codex (GPT)
+
+You need: Node.js 18 or later, a ChatGPT account (or an OpenAI API key), and an API key (`ard_...`) from
+https://mcp.myownline.com/keys.
+
+In the Codex CLI the plugin gives the skill, but it cannot ask for the API key, so you add the server once yourself
+(step 4). The plugin's own server entry stays unused, so the tools do not show twice.
+
+1. Install Codex and sign in: `npm install -g @openai/codex`, then `codex login`.
+   Windows PowerShell: if `codex` fails with "running scripts is disabled on this system", use `codex.cmd` instead of
+   `codex` everywhere below, or allow local scripts once: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.
+2. Add this catalogue and install the plugin:
+
+```
+codex plugin marketplace add continuoustech-ai/agent-ready-plugins
+codex plugin add agent-ready-directory@agent-ready
+```
+
+3. Save your key in the environment variable `ARD_API_KEY`. Windows: `setx ARD_API_KEY "ard_..."`, then close every
+   VS Code window and terminal and open a new one. macOS or Linux: add `export ARD_API_KEY="ard_..."` to `~/.zshrc`
+   or `~/.bashrc` and open a new terminal.
+4. Add the server (once), in a terminal that has the key:
+
+```
+codex mcp add agent-ready-directory --url https://mcp.myownline.com/mcp --bearer-token-env-var ARD_API_KEY
+```
+
+5. Check: start `codex`, type `/mcp`: `agent-ready-directory` shows as connected (5 tools). Then ask, for example:
+   "My water heater is leaking, I'm in 78704".
+6. Updates: `codex plugin marketplace upgrade agent-ready`, then `codex plugin add agent-ready-directory@agent-ready`.
+
+### Troubleshooting (Codex)
+
+- **`/mcp` shows `agent-ready-directory: failed`; F2 shows "Environment variable ARD_API_KEY ... is not set":**
+  Codex keeps a background service running between sessions, and it started before your key was set. In a terminal
+  where the key is set (`if ($env:ARD_API_KEY) { "ok" }` in PowerShell), quit Codex, run
+  `codex app-server daemon stop`, then start `codex` again.
+- **The key is set but a VS Code terminal does not see it:** VS Code terminals copy the environment VS Code started
+  with. Close every VS Code window and open it again, or load it into this terminal (PowerShell):
+  `$env:ARD_API_KEY = [Environment]::GetEnvironmentVariable("ARD_API_KEY", "User")`.
+- **`bad_key`:** the key is mistyped or revoked; make a new one at
+  https://mcp.myownline.com/keys and set it again (step 3).
+- **Uninstall:** `codex plugin remove agent-ready-directory@agent-ready`, `codex plugin marketplace remove agent-ready`,
+  `codex mcp remove agent-ready-directory`.
+
+Note (all apps): the `report_issue` tool writes a real report to the directory's database. When testing it, say it is
 a test.
 
 ## Change and release (maintainers)
 
 Same flow as our other repositories: a branch, a pull request to `main`, the lead merges.
 
-1. Edit the files (for the skill: `plugins/agent-ready-directory/skills/agent-ready-directory/SKILL.md`).
-2. **Raise `version`** in both manifests, `.claude-plugin/plugin.json` and `.antigravity-plugin/plugin.json`
-   (1.0.0 -> 1.1.0). Without a new version, Claude Code users keep their old copy.
+1. Edit the files. The skill's source is the directory repository (`agent/skill/agent-ready-directory/`: `SKILL.md`,
+   `home-services.md`, `visit-businesses.md`); copy all three into `plugins/agent-ready-directory/skills/agent-ready-directory/`
+   unchanged, never edit them only here.
+2. **Raise `version`** in all three manifests, `.claude-plugin/plugin.json`, `.antigravity-plugin/plugin.json` and
+   `plugin.json` (for example 1.4.0 -> 1.5.0). Without a new version, Claude Code and Codex users keep their old copy.
 3. Check from the repository root:
    - `claude plugin validate .` (the last line reads `Validation passed`)
-   - `agy plugin validate plugins/agent-ready-directory` (passes with one expected warning: Antigravity ignores
-     Claude's `.mcp.json`)
+   - `agy plugin validate plugins/agent-ready-directory` (passes with three expected warnings: Antigravity ignores
+     Claude's `.mcp.json` and Codex's `plugin.json` and `mcp.json`)
 4. Try it before the pull request: in Claude Code, in a new folder, `/plugin marketplace add <path to this
    repository>`, install, ask a few questions; in Antigravity, `agy plugin install <path>/plugins/agent-ready-directory`,
-   turn it on, ask the same questions.
+   turn it on, ask the same questions; in Codex, `codex plugin marketplace add <path to this repository>`,
+   `codex plugin add agent-ready-directory@agent-ready`, ask the same questions.
 5. Pull request; the lead merges.
 6. Claude Code users get it through auto-update, or with `/plugin marketplace update agent-ready` and then
-   `/reload-plugins`. Antigravity users pull and reinstall (see above).
+   `/reload-plugins`. Antigravity users pull and reinstall (see above). Codex users run
+   `codex plugin marketplace upgrade agent-ready` and install again.
 
-Also raise `version` when the server URL or the key setting changes, and change it in both `.mcp.json` and
-`mcp_config.json`.
+Also raise `version` when the server URL or the key setting changes, and change it in `.mcp.json`, `mcp_config.json`
+and `mcp.json` (and in the Codex install command above).
