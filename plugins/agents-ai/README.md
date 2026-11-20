@@ -26,7 +26,7 @@ The plugin runs nothing on your computer. It has no hooks, scripts or commands.
 
 ## API key
 
-The server needs a free API key (it starts with `ard_`). Get one at https://mcp.myownline.com/keys by signing in
+The server needs a free API key (it starts with `ard_`). Get one at https://mcp.myownline.com/keys?ref=claude-code by signing in
 with your email. When you enable the plugin, Claude Code asks for the key and stores it as a sensitive setting,
 not in a file.
 

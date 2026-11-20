@@ -11,7 +11,7 @@
       "interface": {
         "displayName": "AgentsAI",
         "shortDescription": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers near Austin, TX",
-        "longDescription": "Ranked local plumbers, HVAC companies, electricians, hair and nail salons and barbers in and around Austin, Texas, from public records (licenses, permits) and the businesses' own websites. Needs an API key (ard_...), free at https://mcp.myownline.com/keys.",
+        "longDescription": "Ranked local plumbers, HVAC companies, electricians, hair and nail salons and barbers in and around Austin, Texas, from public records (licenses, permits) and the businesses' own websites. Needs an API key (ard_...), free at https://mcp.myownline.com/keys?ref=codex.",
         "developerName": "Continuous Tech",
         "category": "Productivity",
         "capabilities": ["Read"],

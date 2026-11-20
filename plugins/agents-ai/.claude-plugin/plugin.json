@@ -9,7 +9,7 @@
     "api_key": {
       "type": "string",
       "title": "API key",
-      "description": "Starts with ard_. No key yet? Get one free at https://mcp.myownline.com/keys (sign in with your email; the key is shown once, so copy it).",
+      "description": "Starts with ard_. No key yet? Get one free at https://mcp.myownline.com/keys?ref=claude-code (sign in with your email; the key is shown once, so copy it).",
       "sensitive": true,
       "required": true
     }

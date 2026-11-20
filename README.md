@@ -31,7 +31,7 @@ Claude's `.mcp.json`.
 
 You need: Claude Code and an API key (`ard_...`).
 
-1. **Get a key (free):** open https://mcp.myownline.com/keys, sign in with your email (we send a link), accept the terms and create a
+1. **Get a key (free):** open https://mcp.myownline.com/keys?ref=claude-code, sign in with your email (we send a link), accept the terms and create a
    key. It is shown **once**: copy it. Up to 3 keys per account; 30 calls a minute and 1,000 a day for the account.
    Lost it? Create a new one there and revoke the old one.
 2. If you added the server by hand before (`claude mcp add agent-ready-directory ...` or `... agents-ai ...`), remove it:
@@ -60,12 +60,12 @@ You need: Claude Code and an API key (`ard_...`).
   `/plugin configure agents-ai@agents-ai`, then restart Claude Code.
 - **Reconnect does not ask for the key.** It uses the saved one; only install and `/plugin configure` ask.
 - **The tools show twice:** you also have a hand-made server; `claude mcp remove agents-ai`.
-- **Lost the key:** it cannot be shown again. Make a new one at https://mcp.myownline.com/keys, revoke the old one, set the new one.
+- **Lost the key:** it cannot be shown again. Make a new one at https://mcp.myownline.com/keys?ref=claude-code, revoke the old one, set the new one.
 - **`daily_limit`:** the account used today's calls (30 a minute, 1,000 a day); they reset at 00:00 UTC.
 
 ## Install in Antigravity (Gemini)
 
-You need: the Antigravity CLI (`agy`) and an API key (`ard_...`) from https://mcp.myownline.com/keys.
+You need: the Antigravity CLI (`agy`) and an API key (`ard_...`) from https://mcp.myownline.com/keys?ref=antigravity.
 
 1. Install the CLI if you do not have it (Windows PowerShell: `irm https://antigravity.google/cli/install.ps1 | iex`;
    other systems: Antigravity's Getting Started page). Open a new terminal and check: `agy --version`.
@@ -90,7 +90,7 @@ agy plugin install agent-ready-plugins/plugins/agents-ai
 ## Install in Codex (GPT)
 
 You need: Node.js 18 or later, a ChatGPT account (or an OpenAI API key), and an API key (`ard_...`) from
-https://mcp.myownline.com/keys.
+https://mcp.myownline.com/keys?ref=codex.
 
 In the Codex CLI the plugin gives the skill, but it cannot ask for the API key, so you add the server once yourself
 (step 4). The plugin's own server entry stays unused, so the tools do not show twice.
@@ -132,7 +132,7 @@ codex mcp add agents-ai --url https://mcp.myownline.com/mcp --bearer-token-env-v
   with. Close every VS Code window and open it again, or load it into this terminal (PowerShell):
   `$env:ARD_API_KEY = [Environment]::GetEnvironmentVariable("ARD_API_KEY", "User")`.
 - **`bad_key`:** the key is mistyped or revoked; make a new one at
-  https://mcp.myownline.com/keys and set it again (step 3).
+  https://mcp.myownline.com/keys?ref=codex and set it again (step 3).
 - **Uninstall:** `codex plugin remove agents-ai@agents-ai`, `codex plugin marketplace remove agents-ai`,
   `codex mcp remove agents-ai`.
 
