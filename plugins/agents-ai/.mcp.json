@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "agent-ready-directory": {
+    "agents-ai": {
       "type": "http",
       "url": "https://mcp.myownline.com/mcp",
       "headers": {

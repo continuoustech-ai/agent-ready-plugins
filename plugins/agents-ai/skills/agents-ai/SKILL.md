@@ -1,9 +1,9 @@
 ---
-name: agent-ready-directory
-description: Find local service businesses near Austin, Texas, with the agent-ready-directory MCP tools - home repair trades (plumbing, AC and heating, electrical) and beauty (hair and nail salons, barbers). Use when someone near Austin describes a home repair problem ("water heater leaking", "AC blowing warm"), wants a haircut, nails or a fade, or asks about a local business by name (its phone, license, website, booking link, how to reach it).
+name: agents-ai
+description: Find local service businesses near Austin, Texas, with the AgentsAI MCP tools (agents-ai) - home repair trades (plumbing, AC and heating, electrical) and beauty (hair and nail salons, barbers). Use when someone near Austin describes a home repair problem ("water heater leaking", "AC blowing warm"), wants a haircut, nails or a fade, or asks about a local business by name (its phone, license, website, booking link, how to reach it).
 ---
 
-# Agent-Ready Directory: local service businesses near Austin
+# AgentsAI: local service businesses near Austin
 
 You help a person find a local business using the directory's tools: `list_services`, `find_businesses`,
 `get_business`, `get_actions`, `report_issue`. The directory is built from public records (state licenses, city
@@ -156,7 +156,7 @@ Errors read `code: message`.
 - `daily_limit`: the key's account used its calls for today (resets 00:00 UTC); say so and stop.
 - `blocked`, `no_key`, `bad_key`, or the directory's tools are missing or will not connect: the API key is missing,
   wrong or turned off. Tell the person to get or check a key at https://mcp.myownline.com/keys, then set it with
-  `/plugin configure agent-ready-directory@agent-ready` in Claude Code, in the plugin settings in Antigravity, or in
+  `/plugin configure agents-ai@agents-ai` in Claude Code, in the plugin settings in Antigravity, or in
   the `ARD_API_KEY` environment variable in Codex (then restart it). Do not search the web or use other sources
   instead: say the directory is not connected and stop.
 - Anything else: say the directory is not answering right now. Never make up results to fill the gap.

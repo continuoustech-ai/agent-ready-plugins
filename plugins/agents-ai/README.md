@@ -1,4 +1,4 @@
-# Agent-Ready Directory
+# AgentsAI
 
 Find plumbers, HVAC (air conditioning and heating) companies, electricians, hair and nail salons and barbers in
 and around Austin, Texas. Describe the problem or the service and a ZIP code, city or neighbourhood ("my water
@@ -8,7 +8,7 @@ public records (state licenses, city permits) and the businesses' own websites.
 
 ## What it contains
 
-- **An MCP server reference:** `https://mcp.myownline.com/mcp`, the Agent-Ready Directory's hosted server. Its
+- **An MCP server reference:** `https://mcp.myownline.com/mcp`, AgentsAI's hosted server. Its
   tools are `list_services`, `find_businesses`, `get_business`, `get_actions` and `report_issue`.
 - **A skill** that tells Claude how to use these tools: `SKILL.md` with the rules for every trade (Austin area and
   the directory's trades only, emergencies first, ask for a place only when a search needs one, never invent a
@@ -21,7 +21,7 @@ The plugin runs nothing on your computer. It has no hooks, scripts or commands.
 
 ```
 /plugin marketplace add continuoustech-ai/agent-ready-plugins
-/plugin install agent-ready-directory@agent-ready
+/plugin install agents-ai@agents-ai
 ```
 
 ## API key

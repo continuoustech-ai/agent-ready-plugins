@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
   "mcpServers": {
-    "agent-ready-directory": {
+    "agents-ai": {
       "type": "streamable-http",
       "url": "https://mcp.myownline.com/mcp",
       "extensions": {

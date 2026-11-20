@@ -1,6 +1,6 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "agent-ready-directory",
+  "name": "agents-ai",
   "version": "1.4.0",
   "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers near Austin, TX",
   "author": {
@@ -9,7 +9,7 @@
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "Agent-Ready Directory",
+        "displayName": "AgentsAI",
         "shortDescription": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers near Austin, TX",
         "longDescription": "Ranked local plumbers, HVAC companies, electricians, hair and nail salons and barbers in and around Austin, Texas, from public records (licenses, permits) and the businesses' own websites. Needs an API key (ard_...), free at https://mcp.myownline.com/keys.",
         "developerName": "Continuous Tech",
