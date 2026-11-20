@@ -1,16 +1,19 @@
 # Agent-Ready Directory
 
-Find plumbers, HVAC (air conditioning and heating) companies and electricians in and around Austin, Texas.
-Describe the problem and give a ZIP code or city ("my water heater is leaking, I'm in 78704"), and Claude returns
-ranked local businesses with their phone numbers, websites, licenses and recent permitted work. The facts come from
+Find plumbers, HVAC (air conditioning and heating) companies, electricians, hair and nail salons and barbers in
+and around Austin, Texas. Describe the problem or the service and a ZIP code, city or neighbourhood ("my water
+heater is leaking, I'm in 78704", "highlights near 78745"), and Claude returns ranked local businesses with their
+phone numbers, websites, booking links, licenses and recent permitted work. The facts come from
 public records (state licenses, city permits) and the businesses' own websites.
 
 ## What it contains
 
 - **An MCP server reference:** `https://mcp.myownline.com/mcp`, the Agent-Ready Directory's hosted server. Its
   tools are `list_services`, `find_businesses`, `get_business`, `get_actions` and `report_issue`.
-- **A skill** that tells Claude how to use these tools: Austin area and these three trades only, never guess a ZIP
-  code, never invent a phone number or price, and say "may" when a fact is not confirmed.
+- **A skill** that tells Claude how to use these tools: `SKILL.md` with the rules for every trade (Austin area and
+  the directory's trades only, emergencies first, ask for a place only when a search needs one, never invent a
+  phone number, price or hours, say "may" when a fact is not confirmed), and one file per kind of business, read
+  only when needed: `home-services.md` (plumbing, HVAC, electrical) and `visit-businesses.md` (salons, barbers).
 
 The plugin runs nothing on your computer. It has no hooks, scripts or commands.
 

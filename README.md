@@ -7,7 +7,7 @@ holds only plugin files: no code, no secrets.
 
 | Plugin | What it does |
 | --- | --- |
-| `agent-ready-directory` | Finds plumbers, HVAC companies and electricians near Austin, TX: the skill (how to handle a home-service request) and the connection to the directory's MCP server (`/mcp` on the API service, five tools) |
+| `agent-ready-directory` | Finds plumbers, HVAC companies, electricians, salons and barbers near Austin, TX: the skill (how to handle a request) and the connection to the directory's MCP server (`/mcp` on the API service, five tools) |
 
 ```
 .claude-plugin/marketplace.json                       the catalogue: lists the plugins in this repository (Claude Code, Codex)
@@ -18,7 +18,9 @@ plugins/agent-ready-directory/
   mcp_config.json                                     Antigravity: the MCP server URL; the key (ARD_API_KEY) is sent as X-API-Key
   plugin.json                                         Codex: name, version, listing details (Agent Plugins format)
   mcp.json                                            Codex: the MCP server URL; declares an API key sent as a Bearer token
-  skills/agent-ready-directory/SKILL.md               the skill (all three)
+  skills/agent-ready-directory/SKILL.md               the skill (all three apps): the rules for every trade
+  skills/agent-ready-directory/home-services.md       the skill: plumbing, HVAC, electrical (read when needed)
+  skills/agent-ready-directory/visit-businesses.md    the skill: salons and barbers (read when needed)
 ```
 
 All three apps use the same skill and the same server; only the manifest and the way the key is set up differ. Each
@@ -134,9 +136,11 @@ a test.
 
 Same flow as our other repositories: a branch, a pull request to `main`, the lead merges.
 
-1. Edit the files (for the skill: `plugins/agent-ready-directory/skills/agent-ready-directory/SKILL.md`).
+1. Edit the files. The skill's source is the directory repository (`agent/skill/agent-ready-directory/`: `SKILL.md`,
+   `home-services.md`, `visit-businesses.md`); copy all three into `plugins/agent-ready-directory/skills/agent-ready-directory/`
+   unchanged, never edit them only here.
 2. **Raise `version`** in all three manifests, `.claude-plugin/plugin.json`, `.antigravity-plugin/plugin.json` and
-   `plugin.json` (1.3.0 -> 1.4.0). Without a new version, Claude Code and Codex users keep their old copy.
+   `plugin.json` (for example 1.4.0 -> 1.5.0). Without a new version, Claude Code and Codex users keep their old copy.
 3. Check from the repository root:
    - `claude plugin validate .` (the last line reads `Validation passed`)
    - `agy plugin validate plugins/agent-ready-directory` (passes with three expected warnings: Antigravity ignores

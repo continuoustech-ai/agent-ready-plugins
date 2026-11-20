@@ -8,7 +8,7 @@
     {
       "name": "agent-ready-directory",
       "source": "./plugins/agent-ready-directory",
-      "description": "Find plumbers, HVAC companies and electricians near Austin, TX"
+      "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers near Austin, TX"
     }
   ]
 }

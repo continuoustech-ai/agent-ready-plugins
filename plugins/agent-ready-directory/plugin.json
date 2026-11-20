@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "agent-ready-directory",
   "version": "1.4.0",
-  "description": "Find plumbers, HVAC companies and electricians near Austin, TX",
+  "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers near Austin, TX",
   "author": {
     "name": "Continuous Tech"
   },
@@ -10,8 +10,8 @@
     "com.openai": {
       "interface": {
         "displayName": "Agent-Ready Directory",
-        "shortDescription": "Find plumbers, HVAC companies and electricians near Austin, TX",
-        "longDescription": "Ranked local plumbers, HVAC companies and electricians in and around Austin, Texas, from public records (licenses, permits) and the businesses' own websites. Needs an API key (ard_...), free at https://mcp.myownline.com/keys.",
+        "shortDescription": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers near Austin, TX",
+        "longDescription": "Ranked local plumbers, HVAC companies, electricians, hair and nail salons and barbers in and around Austin, Texas, from public records (licenses, permits) and the businesses' own websites. Needs an API key (ard_...), free at https://mcp.myownline.com/keys.",
         "developerName": "Continuous Tech",
         "category": "Productivity",
         "capabilities": ["Read"],
@@ -21,7 +21,7 @@
         "defaultPrompt": [
           "My water heater is leaking, I'm in 78704",
           "My AC is blowing warm air, I'm in Round Rock",
-          "Is there a licensed electrician near 78745?"
+          "I need highlights near 78745, ideally I can book online"
         ]
       }
     }
