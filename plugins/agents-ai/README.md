@@ -8,7 +8,7 @@ public records (state licenses, city permits) and the businesses' own websites.
 
 ## What it contains
 
-- **An MCP server reference:** `https://mcp.myownline.com/mcp`, AgentsAI's hosted server. Its
+- **An MCP server reference:** `https://api.agentsai.in/mcp`, AgentsAI's hosted server. Its
   tools are `list_services`, `find_businesses`, `get_business`, `get_actions` and `report_issue`.
 - **A skill** that tells Claude how to use these tools: `SKILL.md` with the rules for every trade (Austin area and
   the directory's trades only, emergencies first, ask for a place only when a search needs one, never invent a
@@ -26,19 +26,19 @@ The plugin runs nothing on your computer. It has no hooks, scripts or commands.
 
 ## API key
 
-The server needs a free API key (it starts with `ard_`). Get one at https://mcp.myownline.com/keys?ref=claude-code by signing in
+The server needs a free API key (it starts with `ard_`). Get one at https://api.agentsai.in/keys by signing in
 with your email. When you enable the plugin, Claude Code asks for the key and stores it as a sensitive setting,
 not in a file.
 
 ## What is sent, and where
 
-Every tool call goes to `https://mcp.myownline.com/mcp` and nowhere else. It carries your API key (in the
+Every tool call goes to `https://api.agentsai.in/mcp` and nowhere else. It carries your API key (in the
 `Authorization` header) and the tool's inputs: a trade or service, a ZIP code or city, a business name or id, and,
 for `report_issue`, a short note about what is wrong with a listing. The server answers with business information
 only. `report_issue` sends a report that a person checks; no other tool changes anything.
 
-- Privacy notice: https://mcp.myownline.com/privacy
-- Terms: https://mcp.myownline.com/terms
+- Privacy notice: https://api.agentsai.in/privacy
+- Terms: https://api.agentsai.in/terms
 - Support and removal requests: support@myownline.com
 
 ## License

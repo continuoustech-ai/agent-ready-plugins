@@ -3,7 +3,7 @@
   "mcpServers": {
     "agents-ai": {
       "type": "streamable-http",
-      "url": "https://mcp.myownline.com/mcp",
+      "url": "https://api.agentsai.in/mcp",
       "extensions": {
         "com.openai": {
           "auth": {

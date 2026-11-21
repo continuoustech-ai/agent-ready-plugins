@@ -155,7 +155,7 @@ Errors read `code: message`.
 - `rate_limited`: wait the seconds it says, then try once more; tell the person if it fails again.
 - `daily_limit`: the key's account used its calls for today (resets 00:00 UTC); say so and stop.
 - `blocked`, `no_key`, `bad_key`, or the directory's tools are missing or will not connect: the API key is missing,
-  wrong or turned off. Tell the person to get or check a key at https://mcp.myownline.com/keys?ref=skill, then set it with
+  wrong or turned off. Tell the person to get or check a key at https://api.agentsai.in/keys, then set it with
   `/plugin configure agents-ai@agents-ai` in Claude Code, in the plugin settings in Antigravity, or in
   the `ARD_API_KEY` environment variable in Codex (then restart it). Do not search the web or use other sources
   instead: say the directory is not connected and stop.

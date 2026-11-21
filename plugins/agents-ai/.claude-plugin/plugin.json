@@ -9,13 +9,13 @@
     "api_key": {
       "type": "string",
       "title": "API key",
-      "description": "Starts with ard_. No key yet? Get one free at https://mcp.myownline.com/keys?ref=claude-code (sign in with your email; the key is shown once, so copy it).",
+      "description": "Starts with ard_. No key yet? Get one free at https://api.agentsai.in/keys (sign in with your email; the key is shown once, so copy it).",
       "sensitive": true,
       "required": true
     }
   },
-  "homepage": "https://mcp.myownline.com/",
+  "homepage": "https://api.agentsai.in/",
   "repository": "https://github.com/continuoustech-ai/agent-ready-plugins",
   "license": "MIT",
-  "privacyPolicyUrl": "https://mcp.myownline.com/privacy"
+  "privacyPolicyUrl": "https://api.agentsai.in/privacy"
 }

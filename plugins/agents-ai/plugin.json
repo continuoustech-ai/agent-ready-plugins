@@ -11,13 +11,13 @@
       "interface": {
         "displayName": "AgentsAI",
         "shortDescription": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers near Austin, TX",
-        "longDescription": "Ranked local plumbers, HVAC companies, electricians, hair and nail salons and barbers in and around Austin, Texas, from public records (licenses, permits) and the businesses' own websites. Needs an API key (ard_...), free at https://mcp.myownline.com/keys?ref=codex.",
+        "longDescription": "Ranked local plumbers, HVAC companies, electricians, hair and nail salons and barbers in and around Austin, Texas, from public records (licenses, permits) and the businesses' own websites. Needs an API key (ard_...), free at https://api.agentsai.in/keys.",
         "developerName": "Continuous Tech",
         "category": "Productivity",
         "capabilities": ["Read"],
-        "websiteURL": "https://mcp.myownline.com/",
-        "privacyPolicyURL": "https://mcp.myownline.com/privacy",
-        "termsOfServiceURL": "https://mcp.myownline.com/terms",
+        "websiteURL": "https://api.agentsai.in/",
+        "privacyPolicyURL": "https://api.agentsai.in/privacy",
+        "termsOfServiceURL": "https://api.agentsai.in/terms",
         "defaultPrompt": [
           "My water heater is leaking, I'm in 78704",
           "My AC is blowing warm air, I'm in Round Rock",
