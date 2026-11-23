@@ -51,7 +51,7 @@ You need: Claude Code and an API key (`ard_...`).
 
 ### Troubleshooting (Claude Code)
 
-- **Renamed to Kanvi (1.4.0):** the plugin was `agent-ready-directory` from the marketplace `agent-ready`. Remove the old one and install the new one:
+- **Renamed to Kanvi (1.5.0):** the plugin was `agent-ready-directory` from the marketplace `agent-ready`. Remove the old one and install the new one:
   `/plugin uninstall agent-ready-directory@agent-ready`, `/plugin marketplace remove agent-ready`, then the two commands
   in step 3. You enter the key again (the same key works). A server you added by hand: `claude mcp remove
   agent-ready-directory`. Installed a pre-release `agents-ai@agents-ai`? `/plugin uninstall agents-ai@agents-ai`
@@ -85,7 +85,7 @@ agy plugin install agent-ready-plugins/plugins/kanvi
    tools.
 5. Updates: there is no auto-update from this repository. `git pull` in your copy, then
    `agy plugin uninstall kanvi` and install again (step 2); you may be asked for the key again.
-6. Renamed to Kanvi (1.4.0): the old plugin was `agent-ready-directory` (or `agents-ai` in a pre-release). After
+6. Renamed to Kanvi (1.5.0): the old plugin was `agent-ready-directory` (or `agents-ai` in a pre-release). After
    `git pull`, run `agy plugin uninstall agent-ready-directory` (or `agents-ai`), then install the new folder
    (step 2) and set the key again (step 3).
 
@@ -119,7 +119,7 @@ codex mcp add kanvi --url https://api.agentsai.in/mcp --bearer-token-env-var ARD
 5. Check: start `codex`, type `/mcp`: `kanvi` shows as connected (5 tools). Then ask, for example:
    "My water heater is leaking, I'm in 78704".
 6. Updates: `codex plugin marketplace upgrade agents-ai`, then `codex plugin add kanvi@agents-ai`.
-7. Renamed to Kanvi (1.4.0): the old names were `agent-ready-directory` (plugin and server) and `agent-ready`
+7. Renamed to Kanvi (1.5.0): the old names were `agent-ready-directory` (plugin and server) and `agent-ready`
    (catalogue). Remove them: `codex plugin remove agent-ready-directory@agent-ready`,
    `codex plugin marketplace remove agent-ready`, `codex mcp remove agent-ready-directory`; then steps 2 and 4.
    The key in `ARD_API_KEY` stays. A pre-release installed as `agents-ai@agents-ai`: also
@@ -150,7 +150,7 @@ Same flow as our other repositories: a branch, a pull request to `main`, the lea
    `home-services.md`, `visit-businesses.md`); copy all three into `plugins/kanvi/skills/kanvi/`
    unchanged, never edit them only here.
 2. **Raise `version`** in all three manifests, `.claude-plugin/plugin.json`, `.antigravity-plugin/plugin.json` and
-   `plugin.json` (for example 1.4.0 -> 1.5.0). Without a new version, Claude Code and Codex users keep their old copy.
+   `plugin.json` (for example 1.5.0 -> 1.6.0). Without a new version, Claude Code and Codex users keep their old copy.
 3. Check from the repository root:
    - `claude plugin validate .` (the last line reads `Validation passed`)
    - `agy plugin validate plugins/kanvi` (passes with three expected warnings: Antigravity ignores
