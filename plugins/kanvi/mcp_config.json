@@ -1,7 +1,7 @@
 {
   "mcpServers": {
-    "agent-ready-directory": {
-      "serverUrl": "https://mcp.myownline.com/mcp",
+    "kanvi": {
+      "serverUrl": "https://api.agentsai.in/mcp",
       "headers": {
         "X-API-Key": "${ARD_API_KEY}"
       },
@@ -9,7 +9,7 @@
         {
           "name": "ARD_API_KEY",
           "title": "API key",
-          "description": "Your ard_... key for the Agent-Ready Directory. Get one free at https://mcp.myownline.com/keys"
+          "description": "Your ard_... key for AgentsAI. Get one free at https://api.agentsai.in/keys"
         }
       ]
     }

@@ -1,14 +1,14 @@
 {
-  "name": "agent-ready",
-  "description": "Continuous Tech plugins for the Agent-Ready Directory",
+  "name": "agents-ai",
+  "description": "Continuous Tech plugins for AgentsAI",
   "owner": {
     "name": "Continuous Tech"
   },
   "plugins": [
     {
-      "name": "agent-ready-directory",
-      "source": "./plugins/agent-ready-directory",
-      "description": "Find plumbers, HVAC companies and electricians near Austin, TX"
+      "name": "kanvi",
+      "source": "./plugins/kanvi",
+      "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers in Texas"
     }
   ]
 }
