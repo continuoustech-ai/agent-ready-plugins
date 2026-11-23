@@ -8,7 +8,7 @@
     {
       "name": "agents-ai",
       "source": "./plugins/agents-ai",
-      "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers near Austin, TX"
+      "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers in Texas"
     }
   ]
 }

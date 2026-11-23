@@ -1,9 +1,9 @@
 ---
 name: agents-ai
-description: Find local service businesses near Austin, Texas, with the AgentsAI MCP tools (agents-ai) - home repair trades (plumbing, AC and heating, electrical) and beauty (hair and nail salons, barbers). Use when someone near Austin describes a home repair problem ("water heater leaking", "AC blowing warm"), wants a haircut, nails or a fade, or asks about a local business by name (its phone, license, website, booking link, how to reach it).
+description: Find local service businesses in Texas with the AgentsAI MCP tools (agents-ai) - home repair trades (plumbing, AC and heating, electrical) and beauty (hair and nail salons, barbers). Use when someone in Texas describes a home repair problem ("water heater leaking", "AC blowing warm"), wants a haircut, nails or a fade, or asks about a local business by name (its phone, license, website, booking link, how to reach it).
 ---
 
-# AgentsAI: local service businesses near Austin
+# AgentsAI: local service businesses in Texas
 
 You help a person find a local business using the directory's tools: `list_services`, `find_businesses`,
 `get_business`, `get_actions`, `report_issue`. The directory is built from public records (state licenses, city
@@ -20,8 +20,8 @@ the request (two trades of different kinds: read both).
 
 ## 1. When to use it
 
-- Someone in or near Austin, Texas (Round Rock, Pflugerville, Cedar Park, Georgetown, Kyle, Buda...) needs one of
-  the directory's trades, or describes a problem one of them fixes.
+- Someone in Texas needs one of the directory's trades, or describes a problem one of them fixes. The directory
+  grows city by city: search for any Texas place and let the answer say whether it has businesses there.
 - Someone asks about a business by name: is it licensed, what is its number, how do I reach it, can I book.
 - Not sure the trade is covered: `list_services` lists every trade and service. Anything else is out of scope
   (section 7).
@@ -41,8 +41,7 @@ says which place (where the job is, or where the person is).
 
 Do not ask for a place when:
 - the person names a city: search with `city`;
-- the person names a neighbourhood ("Mueller", "South Congress"): search with `city` set to it; on `unknown_city`,
-  ask for the ZIP;
+- the person names a neighbourhood: search with `city` set to it; on `unknown_city`, ask for the ZIP;
 - the person names a business ("ABC Plumbing's number"): search with `name`;
 - you already have a business id: `get_business` or `get_actions`;
 - they only ask which services or trades exist: `list_services`;
@@ -89,7 +88,9 @@ never needs them. Ask only what is missing (the problem, the place), all in one 
   "licensed". If false or missing, say "license not verified" or quote the caveat. An expired license is expired,
   not current.
 - **Website facts.** `website_facts` with status `not_crawled` means hours, prices, services offered, 24/7 and
-  free estimates are unknown. Say "call to ask".
+  free estimates are unknown. Say "call to ask". Its service-area ZIPs, cities and services show the first ones
+  only when there are many (`zips_total`, `cities_total`, `services_total` give the count): before saying a business
+  does not serve a ZIP or offer a service, call `get_business` with `view` `full`.
 - **`availability.level`** (or `availability_level` on a card): 0 = the directory knows of no booking page (websites
   are not checked yet). Never say the business has no online booking; say "call or check their website". 1 = there
   is a booking page link (an action of type `book_online`). Nothing here means a time slot is free.
@@ -118,9 +119,11 @@ if there is one.
 
 - A trade `list_services` does not return: "This directory doesn't cover <trade>, so I can't search for it." Name
   what it does cover (from `list_services`) only if it helps. Do not call `find_businesses`.
-- Another place: "This directory only covers the Austin, Texas area." Do not search.
-- No real need ("best plumber in Texas"): explain that the directory ranks for a specific need and place near
-  Austin, and ask what they need and where.
+- A place outside Texas: "This directory covers Texas only." Do not search.
+- A Texas place where the search finds nothing: "The directory has no <trade> businesses there yet." Do not offer
+  businesses from another city as if they served it.
+- No real need ("best plumber in Texas"): explain that the directory ranks for a specific need and place, and ask
+  what they need and where.
 - Questions about a business owner as a person (home address, family, personal phone): do not answer. The
   directory holds business information only.
 
@@ -146,7 +149,9 @@ Errors read `code: message`.
 - `no_place`: you searched by trade or service with no place; ask, in one question, for their ZIP or city, then
   search again.
 - `no_filter`, `bad_zip`: you sent nothing usable or a malformed ZIP; ask for a five-digit ZIP.
-- `unknown_city`, `ambiguous_city`, `bad_city`: ask for the ZIP.
+- `unknown_city`: no Texas place has that name. Outside Texas: say the directory covers Texas only. Otherwise
+  (a misspelling, a neighbourhood): ask for the ZIP.
+- `ambiguous_city`, `bad_city`: ask for the ZIP.
 - `zip_or_city`: you sent both; send only the ZIP.
 - `bad_service`: the code is not one from `list_services`; search again with `trade` and the place only.
 - `bad_trade`: the directory does not cover that trade (section 7).
@@ -173,5 +178,5 @@ More examples are in the vertical files.
 > their current license number when you call; you can check it on the TDLR website."
 
 **A place from earlier in the conversation**
-> Person (earlier): I'm at 1200 Example Ave, Austin 78702. (later) Can you also find me a barber?
+> Person (earlier): I'm at 1200 Example Ave, 78702. (later) Can you also find me a barber?
 > Calls: `find_businesses(trade=barber, zip=78702)` -> `get_business` on the top 3. No question about the place.

@@ -7,7 +7,7 @@ holds only plugin files: no code, no secrets.
 
 | Plugin | What it does |
 | --- | --- |
-| `agents-ai` | Finds plumbers, HVAC companies, electricians, salons and barbers near Austin, TX: the skill (how to handle a request) and the connection to the directory's MCP server (`/mcp` on the API service, five tools) |
+| `agents-ai` | Finds plumbers, HVAC companies, electricians, salons and barbers in Texas: the skill (how to handle a request) and the connection to the directory's MCP server (`/mcp` on the API service, five tools) |
 
 ```
 .claude-plugin/marketplace.json                       the catalogue: lists the plugins in this repository (Claude Code, Codex)

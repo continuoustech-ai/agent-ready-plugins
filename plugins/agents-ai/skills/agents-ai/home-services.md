@@ -54,6 +54,6 @@ someone vulnerable, sparks, smoke, a burning smell from wiring, a gas smell.
 > 555-0102 ... 2. ... 3. ... I don't know who is open right now, so call each until one answers."
 
 **City, no ZIP needed**
-> Person: I need an electrician in Round Rock.
-> Calls: `find_businesses(trade=electrical, city="Round Rock")` -> `get_business` on the top 3. No question about
+> Person: I need an electrician in Example City.
+> Calls: `find_businesses(trade=electrical, city="Example City")` -> `get_business` on the top 3. No question about
 > the ZIP.
