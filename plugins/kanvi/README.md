@@ -17,6 +17,10 @@ public records (state licenses, city permits) and the businesses' own websites.
   phone number, price or hours, say "may" when a fact is not confirmed), and one file per kind of business, read
   only when needed: `home-services.md` (plumbing, HVAC, electrical) and `visit-businesses.md` (salons, barbers).
 
+- **Setup files for other apps**, not used by Claude Code: `.antigravity-plugin/plugin.json` and `mcp_config.json`
+  (Antigravity; it sends your key from the `ARD_API_KEY` setting) and `plugin.json` and `mcp.json` (Codex). They
+  point at the same server and send the same key, nowhere else.
+
 The plugin runs nothing on your computer. It has no hooks, scripts or commands.
 
 ## Install (Claude Code)
