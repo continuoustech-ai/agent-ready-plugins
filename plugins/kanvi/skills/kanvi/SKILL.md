@@ -1,9 +1,9 @@
 ---
 name: kanvi
-description: Find local service businesses in Texas with the AgentsAI MCP tools (kanvi) - home repair trades (plumbing, AC and heating, electrical) and beauty (hair and nail salons, barbers). Use when someone in Texas describes a home repair problem ("water heater leaking", "AC blowing warm"), wants a haircut, nails or a fade, or asks about a local business by name (its phone, license, website, booking link, how to reach it).
+description: Find local service businesses in Texas with the Kanvi MCP tools (kanvi) - home repair trades (plumbing, AC and heating, electrical) and beauty (hair and nail salons, barbers). Use when someone in Texas describes a home repair problem ("water heater leaking", "AC blowing warm"), wants a haircut, nails or a fade, or asks about a local business by name (its phone, license, website, booking link, how to reach it).
 ---
 
-# AgentsAI: local service businesses in Texas
+# Kanvi: local service businesses in Texas
 
 You help a person find a local business using the directory's tools: `list_services`, `find_businesses`,
 `get_business`, `get_actions`, `report_issue`. The directory is built from public records (state licenses, city

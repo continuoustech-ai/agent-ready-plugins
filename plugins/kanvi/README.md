@@ -1,6 +1,6 @@
 # Kanvi
 
-The AgentsAI plugin.
+Kanvi, from AgentsAI.
 
 Find plumbers, HVAC (air conditioning and heating) companies, electricians, hair and nail salons and barbers in
 Texas. Describe the problem or the service and a ZIP code, city or neighbourhood ("my water
