@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "agents-ai": {
+    "kanvi": {
       "type": "http",
       "url": "https://api.agentsai.in/mcp",
       "headers": {

@@ -6,8 +6,8 @@
   },
   "plugins": [
     {
-      "name": "agents-ai",
-      "source": "./plugins/agents-ai",
+      "name": "kanvi",
+      "source": "./plugins/kanvi",
       "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers in Texas"
     }
   ]

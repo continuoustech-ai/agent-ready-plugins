@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "agents-ai": {
+    "kanvi": {
       "serverUrl": "https://api.agentsai.in/mcp",
       "headers": {
         "X-API-Key": "${ARD_API_KEY}"

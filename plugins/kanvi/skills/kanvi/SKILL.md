@@ -1,6 +1,6 @@
 ---
-name: agents-ai
-description: Find local service businesses in Texas with the AgentsAI MCP tools (agents-ai) - home repair trades (plumbing, AC and heating, electrical) and beauty (hair and nail salons, barbers). Use when someone in Texas describes a home repair problem ("water heater leaking", "AC blowing warm"), wants a haircut, nails or a fade, or asks about a local business by name (its phone, license, website, booking link, how to reach it).
+name: kanvi
+description: Find local service businesses in Texas with the AgentsAI MCP tools (kanvi) - home repair trades (plumbing, AC and heating, electrical) and beauty (hair and nail salons, barbers). Use when someone in Texas describes a home repair problem ("water heater leaking", "AC blowing warm"), wants a haircut, nails or a fade, or asks about a local business by name (its phone, license, website, booking link, how to reach it).
 ---
 
 # AgentsAI: local service businesses in Texas
@@ -161,7 +161,7 @@ Errors read `code: message`.
 - `daily_limit`: the key's account used its calls for today (resets 00:00 UTC); say so and stop.
 - `blocked`, `no_key`, `bad_key`, or the directory's tools are missing or will not connect: the API key is missing,
   wrong or turned off. Tell the person to get or check a key at https://api.agentsai.in/keys, then set it with
-  `/plugin configure agents-ai@agents-ai` in Claude Code, in the plugin settings in Antigravity, or in
+  `/plugin configure kanvi@agents-ai` in Claude Code, in the plugin settings in Antigravity, or in
   the `ARD_API_KEY` environment variable in Codex (then restart it). Do not search the web or use other sources
   instead: say the directory is not connected and stop.
 - Anything else: say the directory is not answering right now. Never make up results to fill the gap.
