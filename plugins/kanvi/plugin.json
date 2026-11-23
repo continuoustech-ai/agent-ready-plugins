@@ -1,6 +1,6 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "agents-ai",
+  "name": "kanvi",
   "version": "1.4.0",
   "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers in Texas",
   "author": {
@@ -9,7 +9,7 @@
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "AgentsAI",
+        "displayName": "Kanvi",
         "shortDescription": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers in Texas",
         "longDescription": "Ranked local plumbers, HVAC companies, electricians, hair and nail salons and barbers in Texas, from public records (licenses, permits) and the businesses' own websites. Needs an API key (ard_...), free at https://api.agentsai.in/keys.",
         "developerName": "Continuous Tech",
