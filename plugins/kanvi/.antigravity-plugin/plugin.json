@@ -1,12 +1,12 @@
 {
   "name": "kanvi",
   "displayName": "Kanvi",
-  "version": "1.5.0",
-  "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers in Texas",
+  "version": "1.6.0",
+  "description": "Find plumbers, HVAC companies and electricians in Texas",
   "author": { "name": "Continuous Tech" },
   "suggestedPrompts": [
     "My water heater is leaking, I'm in 78704",
     "My AC is blowing warm air, I'm in Round Rock",
-    "I need highlights near 78745, ideally I can book online"
+    "Half my outlets went dead, I'm in 78745"
   ]
 }

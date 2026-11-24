@@ -3,7 +3,7 @@
   "mcpServers": {
     "kanvi": {
       "type": "streamable-http",
-      "url": "https://api.agentsai.in/mcp",
+      "url": "https://api.kanvi.agentsai.in/mcp",
       "extensions": {
         "com.openai": {
           "auth": {

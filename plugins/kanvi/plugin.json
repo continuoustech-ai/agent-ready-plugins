@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "kanvi",
-  "version": "1.5.0",
-  "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers in Texas",
+  "version": "1.6.0",
+  "description": "Find plumbers, HVAC companies and electricians in Texas",
   "author": {
     "name": "Continuous Tech"
   },
@@ -10,18 +10,18 @@
     "com.openai": {
       "interface": {
         "displayName": "Kanvi",
-        "shortDescription": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers in Texas",
-        "longDescription": "Ranked local plumbers, HVAC companies, electricians, hair and nail salons and barbers in Texas, from public records (licenses, permits) and the businesses' own websites. Needs an API key (ard_...), free at https://api.agentsai.in/keys.",
+        "shortDescription": "Find plumbers, HVAC companies and electricians in Texas",
+        "longDescription": "Ranked local plumbers, HVAC companies and electricians in Texas, from public records (licenses, permits) and the businesses' own websites. Needs an API key (ard_...), free at https://api.kanvi.agentsai.in/keys.",
         "developerName": "Continuous Tech",
         "category": "Productivity",
         "capabilities": ["Read"],
-        "websiteURL": "https://api.agentsai.in/",
-        "privacyPolicyURL": "https://api.agentsai.in/privacy",
-        "termsOfServiceURL": "https://api.agentsai.in/terms",
+        "websiteURL": "https://api.kanvi.agentsai.in/",
+        "privacyPolicyURL": "https://api.kanvi.agentsai.in/privacy",
+        "termsOfServiceURL": "https://api.kanvi.agentsai.in/terms",
         "defaultPrompt": [
           "My water heater is leaking, I'm in 78704",
           "My AC is blowing warm air, I'm in Round Rock",
-          "I need highlights near 78745, ideally I can book online"
+          "Half my outlets went dead, I'm in 78745"
         ]
       }
     }

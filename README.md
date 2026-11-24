@@ -1,13 +1,13 @@
 # agent-ready-plugins
 
-Plugins for AgentsAI, for Claude Code (Claude), Antigravity (Gemini) and Codex (GPT). This repository
+Plugins for Kanvi (by AgentsAI), for Claude Code (Claude), Antigravity (Gemini) and Codex (GPT). This repository
 holds only plugin files: no code, no secrets.
 
-**Website:** https://api.agentsai.in (what it is, the docs at `/docs`, your API key at `/keys`).
+**Website:** https://api.kanvi.agentsai.in (what it is, the docs at `/docs`, your API key at `/keys`).
 
 | Plugin | What it does |
 | --- | --- |
-| `kanvi` | Finds plumbers, HVAC companies, electricians, salons and barbers in Texas: the skill (how to handle a request) and the connection to the directory's MCP server (`/mcp` on the API service, five tools) |
+| `kanvi` | Finds plumbers, HVAC companies and electricians in Texas: the skill (how to handle a request) and the connection to the directory's MCP server (`/mcp` on the API service, five tools) |
 
 ```
 .claude-plugin/marketplace.json                       the catalogue: lists the plugins in this repository (Claude Code, Codex)
@@ -31,7 +31,7 @@ Claude's `.mcp.json`.
 
 You need: Claude Code and an API key (`ard_...`).
 
-1. **Get a key (free):** open https://api.agentsai.in/keys, sign in with your email (we send a link), accept the terms and create a
+1. **Get a key (free):** open https://api.kanvi.agentsai.in/keys, sign in with your email (we send a link), accept the terms and create a
    key. It is shown **once**: copy it. Up to 3 keys per account; 30 calls a minute and 1,000 a day for the account.
    Lost it? Create a new one there and revoke the old one.
 2. If you added the server by hand before (`claude mcp add agent-ready-directory ...`, `... agents-ai ...` or
@@ -51,6 +51,9 @@ You need: Claude Code and an API key (`ard_...`).
 
 ### Troubleshooting (Claude Code)
 
+- **New address (1.6.0):** the server is now `https://api.kanvi.agentsai.in/mcp`. With auto-update on, nothing to do;
+  otherwise `/plugin marketplace update agents-ai`, then restart Claude Code. The old address keeps working, and the
+  same key works on both.
 - **Renamed to Kanvi (1.5.0):** the plugin was `agent-ready-directory` from the marketplace `agent-ready`. Remove the old one and install the new one:
   `/plugin uninstall agent-ready-directory@agent-ready`, `/plugin marketplace remove agent-ready`, then the two commands
   in step 3. You enter the key again (the same key works). A server you added by hand: `claude mcp remove
@@ -61,12 +64,12 @@ You need: Claude Code and an API key (`ard_...`).
   `/plugin configure kanvi@agents-ai`, then restart Claude Code.
 - **Reconnect does not ask for the key.** It uses the saved one; only install and `/plugin configure` ask.
 - **The tools show twice:** you also have a hand-made server; `claude mcp remove kanvi`.
-- **Lost the key:** it cannot be shown again. Make a new one at https://api.agentsai.in/keys, revoke the old one, set the new one.
+- **Lost the key:** it cannot be shown again. Make a new one at https://api.kanvi.agentsai.in/keys, revoke the old one, set the new one.
 - **`daily_limit`:** the account used today's calls (30 a minute, 1,000 a day); they reset at 00:00 UTC.
 
 ## Install in Antigravity (Gemini)
 
-You need: the Antigravity CLI (`agy`) and an API key (`ard_...`) from https://api.agentsai.in/keys.
+You need: the Antigravity CLI (`agy`) and an API key (`ard_...`) from https://api.kanvi.agentsai.in/keys.
 
 1. Install the CLI if you do not have it (Windows PowerShell: `irm https://antigravity.google/cli/install.ps1 | iex`;
    other systems: Antigravity's Getting Started page). Open a new terminal and check: `agy --version`.
@@ -85,14 +88,16 @@ agy plugin install agent-ready-plugins/plugins/kanvi
    tools.
 5. Updates: there is no auto-update from this repository. `git pull` in your copy, then
    `agy plugin uninstall kanvi` and install again (step 2); you may be asked for the key again.
-6. Renamed to Kanvi (1.5.0): the old plugin was `agent-ready-directory` (or `agents-ai` in a pre-release). After
+6. New address (1.6.0): the server is now `https://api.kanvi.agentsai.in/mcp`. `git pull`, then uninstall and
+   install again (step 5). The old address keeps working.
+7. Renamed to Kanvi (1.5.0): the old plugin was `agent-ready-directory` (or `agents-ai` in a pre-release). After
    `git pull`, run `agy plugin uninstall agent-ready-directory` (or `agents-ai`), then install the new folder
    (step 2) and set the key again (step 3).
 
 ## Install in Codex (GPT)
 
 You need: Node.js 18 or later, a ChatGPT account (or an OpenAI API key), and an API key (`ard_...`) from
-https://api.agentsai.in/keys.
+https://api.kanvi.agentsai.in/keys.
 
 In the Codex CLI the plugin gives the skill, but it cannot ask for the API key, so you add the server once yourself
 (step 4). The plugin's own server entry stays unused, so the tools do not show twice.
@@ -113,13 +118,15 @@ codex plugin add kanvi@agents-ai
 4. Add the server (once), in a terminal that has the key:
 
 ```
-codex mcp add kanvi --url https://api.agentsai.in/mcp --bearer-token-env-var ARD_API_KEY
+codex mcp add kanvi --url https://api.kanvi.agentsai.in/mcp --bearer-token-env-var ARD_API_KEY
 ```
 
 5. Check: start `codex`, type `/mcp`: `kanvi` shows as connected (5 tools). Then ask, for example:
    "My water heater is leaking, I'm in 78704".
 6. Updates: `codex plugin marketplace upgrade agents-ai`, then `codex plugin add kanvi@agents-ai`.
-7. Renamed to Kanvi (1.5.0): the old names were `agent-ready-directory` (plugin and server) and `agent-ready`
+7. New address (1.6.0): the server is now `https://api.kanvi.agentsai.in/mcp`. A server added by hand before keeps
+   working on the old address; to move it, `codex mcp remove kanvi`, then step 4 again.
+8. Renamed to Kanvi (1.5.0): the old names were `agent-ready-directory` (plugin and server) and `agent-ready`
    (catalogue). Remove them: `codex plugin remove agent-ready-directory@agent-ready`,
    `codex plugin marketplace remove agent-ready`, `codex mcp remove agent-ready-directory`; then steps 2 and 4.
    The key in `ARD_API_KEY` stays. A pre-release installed as `agents-ai@agents-ai`: also
@@ -135,7 +142,7 @@ codex mcp add kanvi --url https://api.agentsai.in/mcp --bearer-token-env-var ARD
   with. Close every VS Code window and open it again, or load it into this terminal (PowerShell):
   `$env:ARD_API_KEY = [Environment]::GetEnvironmentVariable("ARD_API_KEY", "User")`.
 - **`bad_key`:** the key is mistyped or revoked; make a new one at
-  https://api.agentsai.in/keys and set it again (step 3).
+  https://api.kanvi.agentsai.in/keys and set it again (step 3).
 - **Uninstall:** `codex plugin remove kanvi@agents-ai`, `codex plugin marketplace remove agents-ai`,
   `codex mcp remove kanvi`.
 

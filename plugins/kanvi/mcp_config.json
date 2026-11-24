@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "kanvi": {
-      "serverUrl": "https://api.agentsai.in/mcp",
+      "serverUrl": "https://api.kanvi.agentsai.in/mcp",
       "headers": {
         "X-API-Key": "${ARD_API_KEY}"
       },
@@ -9,7 +9,7 @@
         {
           "name": "ARD_API_KEY",
           "title": "API key",
-          "description": "Your ard_... key for AgentsAI. Get one free at https://api.agentsai.in/keys"
+          "description": "Your ard_... key for Kanvi. Get one free at https://api.kanvi.agentsai.in/keys"
         }
       ]
     }
