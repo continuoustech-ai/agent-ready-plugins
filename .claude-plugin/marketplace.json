@@ -1,6 +1,6 @@
 {
   "name": "agents-ai",
-  "description": "Continuous Tech plugins for AgentsAI",
+  "description": "Continuous Tech plugins for Kanvi",
   "owner": {
     "name": "Continuous Tech"
   },
@@ -8,7 +8,7 @@
     {
       "name": "kanvi",
       "source": "./plugins/kanvi",
-      "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers in Texas"
+      "description": "Find plumbers, HVAC companies and electricians in Texas"
     }
   ]
 }

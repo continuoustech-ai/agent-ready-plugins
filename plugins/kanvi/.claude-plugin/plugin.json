@@ -1,7 +1,7 @@
 {
   "name": "kanvi",
-  "version": "1.5.0",
-  "description": "Find plumbers, HVAC companies, electricians, hair and nail salons and barbers in Texas",
+  "version": "1.6.0",
+  "description": "Find plumbers, HVAC companies and electricians in Texas",
   "author": {
     "name": "Continuous Tech"
   },
@@ -9,13 +9,13 @@
     "api_key": {
       "type": "string",
       "title": "API key",
-      "description": "Starts with ard_. No key yet? Get one free at https://api.agentsai.in/keys (sign in with your email; the key is shown once, so copy it).",
+      "description": "Starts with ard_. No key yet? Get one free at https://api.kanvi.agentsai.in/keys (sign in with your email; the key is shown once, so copy it).",
       "sensitive": true,
       "required": true
     }
   },
-  "homepage": "https://api.agentsai.in/",
+  "homepage": "https://api.kanvi.agentsai.in/",
   "repository": "https://github.com/continuoustech-ai/agent-ready-plugins",
   "license": "MIT",
-  "privacyPolicyUrl": "https://api.agentsai.in/privacy"
+  "privacyPolicyUrl": "https://api.kanvi.agentsai.in/privacy"
 }
