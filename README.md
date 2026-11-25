@@ -51,6 +51,8 @@ You need: Claude Code and an API key (`ard_...`).
 
 ### Troubleshooting (Claude Code)
 
+- **1.6.1:** the skill describes the new result order (in the place, then nearby, then businesses serving the area
+  from farther away). Auto-update gets it; otherwise `/plugin marketplace update agents-ai`.
 - **New address (1.6.0):** the server is now `https://api.kanvi.agentsai.in/mcp`. With auto-update on, nothing to do;
   otherwise `/plugin marketplace update agents-ai`, then restart Claude Code. The old address keeps working, and the
   same key works on both.
