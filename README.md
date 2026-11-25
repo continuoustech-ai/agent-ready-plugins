@@ -173,3 +173,22 @@ Same flow as our other repositories: a branch, a pull request to `main`, the lea
 
 Also raise `version` when the server URL or the key setting changes, and change it in `.mcp.json`, `mcp_config.json`
 and `mcp.json` (and in the Codex install command above).
+
+## Official MCP Registry (maintainers)
+
+`server.json` lists the server in the official MCP Registry (https://registry.modelcontextprotocol.io) as
+`in.agentsai/kanvi`: only the name, a description and the live URL (`https://api.kanvi.agentsai.in/mcp`), no code.
+Aggregators such as Glama, PulseMCP and GitHub's MCP list read it from there. It does not list us in Claude, ChatGPT
+or Gemini; those take their own submissions.
+
+- **Name:** `in.agentsai` is our domain `agentsai.in` reversed. The registry lets only the owner of that domain
+  publish under it, proven by a DNS TXT record on `agentsai.in`. The name cannot be changed once published.
+- **Key:** an Ed25519 key pair. The private key is kept outside every repository (the lead's machine and the team's
+  secret store, never committed); its public half is the TXT record
+  `v=MCPv1; k=ed25519; p=<public key>` on `agentsai.in` (the root, not a subdomain). Leave that record in place.
+- **Publish or update** (raise `version` in `server.json` first, from this folder):
+  1. `mcp-publisher validate`
+  2. `mcp-publisher login dns --domain agentsai.in --private-key <private key in hex>`
+  3. `mcp-publisher publish`
+  4. Check: `curl "https://registry.modelcontextprotocol.io/v0.1/servers?search=in.agentsai/kanvi"`
+- Raise the version and publish again when the server URL or the description changes.

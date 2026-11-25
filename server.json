@@ -1,0 +1,17 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "in.agentsai/kanvi",
+  "title": "Kanvi",
+  "description": "Texas plumbers, HVAC and electricians: licenses, services and contacts from public records",
+  "repository": {
+    "url": "https://github.com/continuoustech-ai/agent-ready-plugins",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.kanvi.agentsai.in/mcp"
+    }
+  ]
+}
