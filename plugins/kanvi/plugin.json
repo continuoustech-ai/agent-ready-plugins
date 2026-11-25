@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "kanvi",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Find plumbers, HVAC companies and electricians in Texas",
   "author": {
     "name": "Continuous Tech"

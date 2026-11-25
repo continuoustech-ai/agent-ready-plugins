@@ -80,8 +80,9 @@ never needs them. Ask only what is missing (the problem, the place), all in one 
   <date>", "listed by one source only", "not checked for this service"). Always pass them on.
 - **`zip_match`** on a card: `job` = it has done permitted work in that ZIP; `served` = its own website lists the
   area; `likely` = its own address is in that ZIP; `nearby` = its address is in a nearby ZIP, about `distance_km`
-  away (ZIP center to ZIP center, so say "about"). Say which, in plain words. Nearby ones come after the exact
-  matches, closest first. A city search covers the whole city and has no nearby results.
+  away (ZIP center to ZIP center, so say "about"). Say which, in plain words. Businesses in the place come first,
+  then nearby ones (closest first), then businesses that only say they serve the area from farther away. A city
+  search covers the whole city and has no nearby results.
 - **Certainty** on each fact: `confirmed` = say it plainly; `likely` = say "likely" or "probably"; `may` = say
   "may" and suggest checking when they call.
 - **Licenses.** `license_verified` (card) and each license's `verified` (profile) are the only basis for saying
