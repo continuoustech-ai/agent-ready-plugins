@@ -15,7 +15,7 @@ public records (state licenses, city permits) and the businesses' own websites.
 - **A skill** that tells Claude how to use these tools: `SKILL.md` with the rules for every trade (Texas only and
   the directory's trades only, emergencies first, ask for a place only when a search needs one, never invent a
   phone number, price or hours, say "may" when a fact is not confirmed), and one file per kind of business, read
-  only when needed: `home-services.md` (plumbing, HVAC, electrical) and `visit-businesses.md` (salons, barbers).
+  only when needed, such as `home-services.md` (plumbing, HVAC, electrical).
 
 The plugin runs nothing on your computer. It has no hooks, scripts or commands.
 

@@ -21,7 +21,7 @@ plugins/kanvi/
   mcp.json                                            Codex: the MCP server URL; declares an API key sent as a Bearer token
   skills/kanvi/SKILL.md                               the skill (all three apps): the rules for every trade
   skills/kanvi/home-services.md                       the skill: plumbing, HVAC, electrical (read when needed)
-  skills/kanvi/visit-businesses.md                    the skill: salons and barbers (read when needed)
+  skills/kanvi/visit-businesses.md                    the skill: businesses the person goes to (read when needed)
 ```
 
 All three apps use the same skill and the same server; only the manifest and the way you connect differ (Claude:
