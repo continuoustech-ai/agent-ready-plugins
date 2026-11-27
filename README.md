@@ -12,8 +12,9 @@ holds only plugin files: no code, no secrets.
 ```
 .claude-plugin/marketplace.json                       the catalogue: lists the plugins in this repository (Claude Code, Codex)
 plugins/kanvi/
-  .claude-plugin/plugin.json                          Claude Code: name, version, the API key setting
-  .mcp.json                                           Claude Code: the MCP server URL; the key is sent as a Bearer token
+  .claude-plugin/plugin.json                          Claude Code: name, version, listing details (icon, privacy, terms, docs)
+  assets/icon.png                                     the listing icon (1024 x 1024 PNG)
+  .mcp.json                                           Claude Code: the MCP server URL; sign-in (OAuth), no key
   .antigravity-plugin/plugin.json                     Antigravity: name, version, suggested prompts
   mcp_config.json                                     Antigravity: the MCP server URL; the key (ARD_API_KEY) is sent as X-API-Key
   plugin.json                                         Codex: name, version, listing details (Agent Plugins format)
@@ -23,50 +24,62 @@ plugins/kanvi/
   skills/kanvi/visit-businesses.md                    the skill: salons and barbers (read when needed)
 ```
 
-All three apps use the same skill and the same server; only the manifest and the way the key is set up differ. Each
+All three apps use the same skill and the same server; only the manifest and the way you connect differ (Claude:
+sign-in; Antigravity and Codex: an API key). Each
 app reads only its own files: Antigravity ignores `plugin.json` and `mcp.json`, and Codex uses them instead of
 Claude's `.mcp.json`.
 
 ## Install in Claude Code
 
-You need: Claude Code and an API key (`ard_...`).
+You need: Claude Code and an email address. No API key: you sign in.
 
-1. **Get a key (free):** open https://api.kanvi.agentsai.in/keys, sign in with your email (we send a link), accept the terms and create a
-   key. It is shown **once**: copy it. Up to 3 keys per account; 30 calls a minute and 1,000 a day for the account.
-   Lost it? Create a new one there and revoke the old one.
-2. If you added the server by hand before (`claude mcp add agent-ready-directory ...`, `... agents-ai ...` or
+1. If you added the server by hand before (`claude mcp add agent-ready-directory ...`, `... agents-ai ...` or
    `... kanvi ...`), remove it: `claude mcp remove agent-ready-directory` (or `agents-ai`, or `kanvi`).
-3. In a Claude Code session (not in the shell, which does not ask for the key):
+2. In a Claude Code session:
 
 ```
 /plugin marketplace add continuoustech-ai/agent-ready-plugins
 /plugin install kanvi@agents-ai
 ```
 
-4. Enter your API key when asked. Claude Code stores it in the system's secure storage, never in a file. To change it
-   later: `/plugin configure kanvi@agents-ai`.
-5. Turn on updates: `/plugin`, then **Marketplaces**, select `agents-ai`, **Enable auto-update**.
-6. Check: `/mcp` lists `plugin:kanvi:kanvi` as connected. Then ask, for example:
+3. Sign in: `/mcp`, select `plugin:kanvi:kanvi` (it shows as needing authentication), **Authenticate**. Your browser
+   opens: sign in with your email (we send a link), accept the terms and allow Claude Code. 30 calls a minute and
+   1,000 a day for the account.
+4. Turn on updates: `/plugin`, then **Marketplaces**, select `agents-ai`, **Enable auto-update**.
+5. Check: `/mcp` lists `plugin:kanvi:kanvi` as connected. Then ask, for example:
    "My water heater is leaking, I'm in 78704".
+
+### Use an API key instead (developers)
+
+The plugin signs in; it does not take a key. To use a key (`ard_...`, made at https://api.kanvi.agentsai.in/keys,
+shown **once**), add the server yourself:
+
+```
+claude mcp add --transport http kanvi-key https://api.kanvi.agentsai.in/mcp --header "Authorization: Bearer ard_..."
+```
+
+To keep the skill as well, install the plugin too and turn off its server (`/mcp`, select `plugin:kanvi:kanvi`,
+**Disable**), so the tools do not show twice.
 
 ### Troubleshooting (Claude Code)
 
+- **Sign-in instead of a key (1.7.1):** the plugin no longer asks for an API key; you sign in (step 3). After the
+  update, `/mcp`, select `plugin:kanvi:kanvi`, **Authenticate** once. The key you entered before is no longer used by
+  the plugin (it still works for a server you add yourself, above).
 - **1.6.1:** the skill describes the new result order (in the place, then nearby, then businesses serving the area
   from farther away). Auto-update gets it; otherwise `/plugin marketplace update agents-ai`.
 - **New address (1.6.0):** the server is now `https://api.kanvi.agentsai.in/mcp`. With auto-update on, nothing to do;
-  otherwise `/plugin marketplace update agents-ai`, then restart Claude Code. The old address keeps working, and the
-  same key works on both.
+  otherwise `/plugin marketplace update agents-ai`, then restart Claude Code. The old address keeps working.
 - **Renamed to Kanvi (1.5.0):** the plugin was `agent-ready-directory` from the marketplace `agent-ready`. Remove the old one and install the new one:
   `/plugin uninstall agent-ready-directory@agent-ready`, `/plugin marketplace remove agent-ready`, then the two commands
-  in step 3. You enter the key again (the same key works). A server you added by hand: `claude mcp remove
-  agent-ready-directory`. Installed a pre-release `agents-ai@agents-ai`? `/plugin uninstall agents-ai@agents-ai`
-  first.
-- **"Dynamic Client Registration rejected (HTTP 404)"** after Authenticate or Reconnect: the server got no key or a
-  wrong one. It uses API keys, not sign-in: do not use Authenticate. Set the key with
-  `/plugin configure kanvi@agents-ai`, then restart Claude Code.
-- **Reconnect does not ask for the key.** It uses the saved one; only install and `/plugin configure` ask.
-- **The tools show twice:** you also have a hand-made server; `claude mcp remove kanvi`.
-- **Lost the key:** it cannot be shown again. Make a new one at https://api.kanvi.agentsai.in/keys, revoke the old one, set the new one.
+  in step 2, and sign in (step 3). A server you added by hand: `claude mcp remove agent-ready-directory`. Installed a
+  pre-release `agents-ai@agents-ai`? `/plugin uninstall agents-ai@agents-ai` first.
+- **`bad_token`, or `/mcp` shows the server as needing authentication again:** the sign-in expired or was removed.
+  `/mcp`, select `plugin:kanvi:kanvi`, **Authenticate**.
+- **`terms_required`:** you signed in but have not accepted the terms. Accept them at
+  https://api.kanvi.agentsai.in/keys, then try again.
+- **The tools show twice:** you also have a hand-made server (`kanvi` or `kanvi-key`); remove it with
+  `claude mcp remove <name>`, or turn off the plugin's server in `/mcp`.
 - **`daily_limit`:** the account used today's calls (30 a minute, 1,000 a day); they reset at 00:00 UTC.
 
 ## Install in Antigravity (Gemini)
@@ -157,11 +170,14 @@ Same flow as our other repositories: a branch, a pull request to `main`, the lea
 
 1. Edit the files. The skill's source is the directory repository (`agent/skill/kanvi/`: `SKILL.md`,
    `home-services.md`, `visit-businesses.md`); copy all three into `plugins/kanvi/skills/kanvi/`
-   unchanged, never edit them only here.
+   unchanged, never edit them only here. The skill's `version` (in `SKILL.md`) must match the directory's `main`:
+   the MCP server names that version, and a copy that differs looks out of date.
 2. **Raise `version`** in all three manifests, `.claude-plugin/plugin.json`, `.antigravity-plugin/plugin.json` and
    `plugin.json` (for example 1.5.0 -> 1.6.0). Without a new version, Claude Code and Codex users keep their old copy.
 3. Check from the repository root:
-   - `claude plugin validate .` (the last line reads `Validation passed`)
+   - `claude plugin validate .` (the marketplace; the last line reads `Validation passed`)
+   - `claude plugin validate --strict plugins/kanvi` (the plugin, with the plugin directory's own checks; it must
+     report nothing)
    - `agy plugin validate plugins/kanvi` (passes with three expected warnings: Antigravity ignores
      Claude's `.mcp.json` and Codex's `plugin.json` and `mcp.json`)
 4. Try it before the pull request: in Claude Code, in a new folder, `/plugin marketplace add <path to this
@@ -173,7 +189,7 @@ Same flow as our other repositories: a branch, a pull request to `main`, the lea
    `/reload-plugins`. Antigravity users pull and reinstall (see above). Codex users run
    `codex plugin marketplace upgrade agents-ai` and install again.
 
-Also raise `version` when the server URL or the key setting changes, and change it in `.mcp.json`, `mcp_config.json`
+Also raise `version` when the server URL or the sign-in or key setting changes, and change it in `.mcp.json`, `mcp_config.json`
 and `mcp.json` (and in the Codex install command above).
 
 ## Official MCP Registry (maintainers)
