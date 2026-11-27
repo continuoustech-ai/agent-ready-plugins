@@ -1,7 +1,7 @@
 {
   "name": "kanvi",
   "displayName": "Kanvi",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "icon": "./assets/icon.png",
   "description": "Find plumbers, HVAC companies and electricians in Texas",
   "author": {

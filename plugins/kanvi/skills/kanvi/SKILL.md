@@ -1,35 +1,10 @@
 ---
 name: kanvi
-version: 1.7.1
+version: 1.7.2
 description: Find local service businesses in Texas with the Kanvi MCP tools (kanvi) - plumbers, AC and heating (HVAC) companies and electricians today; list_services names every trade covered. Use when someone in Texas describes a home repair problem ("water heater leaking", "AC blowing warm", "outlets dead") or asks about a local business by name (its phone, license, website, booking link, how to reach it).
 ---
 
 # Kanvi: local service businesses in Texas
-
-## Setup (when someone says "Set up https://kanvi.agentsai.in/SKILL.md")
-
-Installed by a plugin (the Kanvi plugin in Claude, Antigravity or Codex)? Skip this section: the plugin connects the
-server and updates this file. Never fetch or save another copy next to it.
-
-1. **Connected already?** If the `kanvi` tools (`find_businesses`, `get_business` and the rest) are in your tool
-   list, go to step 3.
-2. **Connect the MCP server** `https://api.kanvi.agentsai.in/mcp` (Streamable HTTP) in the client you run in.
-   - Claude Code: run `claude mcp add --transport http kanvi https://api.kanvi.agentsai.in/mcp`, then ask the person
-     to run `/mcp` and sign in (email and a code in the browser, no key).
-   - Codex, Cursor and others: add the same URL to the client's MCP config and sign in the same way.
-   - Only if the client cannot sign in (OAuth): ask the person for a key from https://api.kanvi.agentsai.in/keys and
-     send it as the `X-API-Key` header, from an environment variable or the client's own secure settings. Never write
-     the key into a file in a repo or into this skill.
-3. **Save the skill** into the client's skill folder (Claude Code: `~/.claude/skills/kanvi/`), replacing old copies:
-   this file as `SKILL.md`, and https://kanvi.agentsai.in/skill/home-services.md and
-   https://kanvi.agentsai.in/skill/visit-businesses.md next to it under the same names.
-4. **Check:** call `list_services` once and tell the person, in one or two lines, which trades are covered (Texas
-   only, growing city by city).
-5. **Updates (only for a copy you saved in step 3):** the `version` above is this file's. The MCP server's
-   instructions name the current skill version; when they differ, fetch this URL again and repeat step 3.
-
-Clients without skills (ChatGPT, or claude.ai without the plugin): step 2 is enough; the server's instructions carry
-the rules below.
 
 You help a person find a local business using the directory's tools: `list_services`, `find_businesses`,
 `get_business`, `get_actions`, `report_issue`. The directory is built from public records (state licenses, city
@@ -194,7 +169,7 @@ Errors read `code: message`.
   - Claude apps (web, Desktop, mobile): connect Kanvi again in Settings > Connectors.
   - Antigravity (the plugin settings) or Codex (the `ARD_API_KEY` environment variable, then restart it): check the
     key at https://api.kanvi.agentsai.in/keys and set it again.
-  Do not search the web or use other sources instead: say the directory is not connected and stop.
+  Say the directory is not connected. Never present results from other sources as if they came from the directory.
 - Anything else: say the directory is not answering right now. Never make up results to fill the gap.
 
 ## 11. Examples (made-up businesses)
