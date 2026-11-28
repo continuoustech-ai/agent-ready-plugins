@@ -63,6 +63,8 @@ To keep the skill as well, install the plugin too and turn off its server (`/mcp
 
 ### Troubleshooting (Claude Code)
 
+- **1.7.2:** the skill no longer contains setup steps (they are in the docs, "Set up the skill"). Auto-update gets it;
+  otherwise `/plugin marketplace update agents-ai`.
 - **Sign-in instead of a key (1.7.1):** the plugin no longer asks for an API key; you sign in (step 3). After the
   update, `/mcp`, select `plugin:kanvi:kanvi`, **Authenticate** once. The key you entered before is no longer used by
   the plugin (it still works for a server you add yourself, above).
@@ -171,7 +173,7 @@ Same flow as our other repositories: a branch, a pull request to `main`, the lea
 1. Edit the files. The skill's source is the directory repository (`agent/skill/kanvi/`: `SKILL.md`,
    `home-services.md`, `visit-businesses.md`); copy all three into `plugins/kanvi/skills/kanvi/`
    unchanged, never edit them only here. The skill's `version` (in `SKILL.md`) must match the directory's `main`:
-   the MCP server names that version, and a copy that differs looks out of date.
+   plugins and the website (`/SKILL.md`) then give users the same skill.
 2. **Raise `version`** in all three manifests, `.claude-plugin/plugin.json`, `.antigravity-plugin/plugin.json` and
    `plugin.json` (for example 1.5.0 -> 1.6.0). Without a new version, Claude Code and Codex users keep their old copy.
 3. Check from the repository root:
